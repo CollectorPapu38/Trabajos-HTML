@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<!-- Fig. 2.12: tabla1.html -->
+<!-- Creación de una tabla básica. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Tablas</title>
+   </head>
+
+   <body>
+      <table border = "1" summary = "Tabla de frutas (1era columna) y
+         sus precios (2da columna)">
+         <caption>Tabla de frutas y sus precios</caption>
+
+         <!-- da formato al área del encabezado de la tabla -->
+         <thead>
+            <tr>
+               <th>Fruta</th>
+               <th>Precio</th>
+            </tr>
+         </thead>
+
+         <!-- todo el contenido del pie de la tabla está encerrado -->
+         <!-- en un elemento tfoot. Éste aparece primero en la tabla -->
+         <!-- pero el navegador lo despliega al último en la tabla -->
+         <tfoot>
+            <tr>
+               <th>Total</th>
+               <th>$3.75</th>
+            </tr>
+         </tfoot>
+
+         <!-- todo el contenido de la tabla está encerrado -->
+         <!-- en un elemento tbody -->
+         <tbody>
+            <tr>
+               <td>Manzana</td>
+               <td>$0.25</td>
+            </tr>
+            <tr>
+               <td>Naranjo</td>
+               <td>$0.50</td>
+            </tr>
+            <tr>
+               <td>Plátano</td>  <!-- jala sin acentos-->
+               <td>$1.00</td>
+            </tr>
+            <tr>
+               <td>Piño</td>
+               <td>$2.00</td>
+            </tr>
+         </tbody>
+      </table>
+          <p>
+    <a href="../Ejercicio 2.9.html">
+        <img src="../image/rever.png" width="50" height="50" alt="Regresar al menú principal">
+    </a>
+</p>
+   </body>
+</html>

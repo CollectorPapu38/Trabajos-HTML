@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Formulario de Registro</h2>
+
+    <!-- Formulario con campos de registro obligatorios -->
+    <form method="post" action="http://www.deitel.com">
+        
+        <p>
+            Primer nombre: 
+            <input type="text" placeholder="Primer nombre" required autofocus>
+        </p>
+
+        <p>
+            Apellido: 
+            <input type="text" placeholder="Apellido" required>
+        </p>
+
+        <p>
+            Correo electrónico: 
+            <input type="email" placeholder="nombre@dominio.com" required>
+        </p>
+
+        <hr>
+
+        <!-- Sección de encuesta opcional -->
+        <h3>Encuesta opcional</h3>
+        
+        <p>
+            <label for="anoUniversidad">¿En qué año de la universidad te encuentras?</label>
+            <input type="text" id="anoUniversidad" list="anios" placeholder="Selecciona un año">
+            
+            <datalist id="anios">
+                <option value="Primer año">
+                <option value="Segundo año">
+                <option value="Tercer año">
+                <option value="Cuarto año">
+                <option value="Sexto semestre o superior">
+            </datalist>
+        </p>
+
+        <br>
+
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </p>
+
+    </form>
+<a href="3.1Indice.html">
+    <img src="ima/rever.png" alt="Regresar al índice">
+</a>
+</body>
+</html>

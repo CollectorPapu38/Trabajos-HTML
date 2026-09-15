@@ -1,0 +1,34 @@
+Preguntas de evalucion no tengo idea si podra abrirlo
+
+2.10 Identifique cada uno de los siguientes objetos de HTML5 como un elemento o un atributo:
+a) html    Elemento
+b) width  Atributo
+c) href   Atributo
+d) br   Elemento
+e) h3   Elemento
+f) a    Elemento
+g) src   Atributo
+
+2.11 Indique cuál de los siguientes enunciados es verdadero y cuál es falso. 
+Si es falso, explique por qué:
+a) Falso. HTML5 no distingue entre mayúsculas y minúsculas en los nombres de los 
+elementos.
+b) Verdadero. Los documentos HTML5 pueden llevar la extensión .html o .htm.
+c) Falso. La referencia a entidad de carácter para el carácter menor que (<) 
+es &lt; (&less; no existe).
+d) Falso. Las etiquetas de encabezado (<h1> a <h6>) son elementos de nivel de
+ bloque y no deben anidarse dentro de párrafos (<p>) o enlaces (<a>).
+
+2.12 Complete las siguientes oraciones:
+a) Los comentarios de HTML5 comienzan con <!-- y terminan con -->.
+b) En HTML5, los valores de los atributos pueden ir encerrados entre comillas dobles (" ") o comillas simples (' ').
+c) &amp; es la referencia a entidad de carácter para un signo &.
+d) El elemento <strong> (o <b>) puede usarse para crear texto en negrita.
+
+2.13 Clasifique cada uno de los siguientes objetos como elemento o atributo:
+a) width    Atributo
+b) td    Elemento
+c) th    Elemento
+d) tr    Elemento
+e) select    Elemento
+f) type    Atributo
