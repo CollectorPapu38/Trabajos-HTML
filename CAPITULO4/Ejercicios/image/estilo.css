@@ -1,0 +1,20 @@
+div.boton {
+    display: inline-block;
+    border: 2px solid blue;
+    background-color: lightgray;
+    padding: 10px 20px;
+}
+
+div.boton a {
+    color: black;
+    text-decoration: none;
+}
+
+div.boton:hover {
+    border-color: darkblue;
+    background-color: yellow;
+}
+
+div.boton:hover a {
+    color: red;
+}
