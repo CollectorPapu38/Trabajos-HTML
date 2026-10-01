@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.5: sombrasdecajas.html -->
+<!-- Uso de box-shadow para agregar sombras a elementos de caja. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Sombras de cajas</title>
+      <style type = "text/css">
+         .caja
+         {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 40px;
+            text-align: center;
+            /* Flexbox para centrar horizontal y verticalmente el contenido */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
+
+         #caja1
+         {
+            background-color: rgb(13, 51, 51);
+            box-shadow: 15px 15px 20px rgb(105, 105, 105);
+         }
+
+         #caja2
+         {
+            background-color: rgb(57, 57, 15);
+            box-shadow: -15px -15px 30px rgb(64, 27, 167);
+         }
+
+         #caja3
+         {
+            background-color: rgb(208, 17, 45);
+            box-shadow: 15px 15px 10px rgb(93, 125, 117);
+         }
+      </style>
+   </head>
+   <body>
+      <div id = "caja1" class = "caja">
+         <strong>Caja 1: box-shadow de 15px 15px 20px dimgrey</strong>
+      </div>
+
+      <div id = "caja2" class = "caja">
+         <strong>Caja 2: box-shadow de -15px -15px 30px dimgrey</strong>
+      </div>
+
+      <div id = "caja3" class = "caja">
+         <strong>Caja 3: box-shadow de 15px 15px 10px dimgrey</strong>
+      </div>
+
+  
+      <a href="Ir a indice.html">
+         <img src="image/rever.png" alt="Ir al Menú" width="150">
+      </a>
+   </body>
+</html>

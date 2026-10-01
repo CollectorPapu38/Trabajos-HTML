@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- Fig. 5.18: consultasmedios.html -->
+<!-- Uso de consultas de medios para volver a dar formato a una página con base en la anchura del dispositivo. -->
+
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Mejores Figuras de Halo Mega Construx</title>
+    <style type = "text/css">
+        p { margin: 0.9em 0em; }
+        .figura-img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+    
+
+        /* Estilos para dispositivos con anchuras de pantalla de 481px a 1024px */
+        @media only screen and (min-width: 481px) and (max-width:1024px)
+        {
+            div {
+                -webkit-column-count: 2;
+                column-count: 2;
+                -webkit-column-gap: 30px;
+                column-gap: 30px;
+                -webkit-column-rule: 1px outset black;
+                column-rule: 1px outset black; 
+            }
+        }
+
+        /* Estilos para pantallas grandes a partir de 1025px */
+        @media only screen and (min-width: 1025px)
+        {
+            div {
+                -webkit-column-count: 3;
+                column-count: 3;
+                -webkit-column-gap: 30px;
+                column-gap: 30px;
+                -webkit-column-rule: 1px outset black;
+                column-rule: 1px outset black; 
+            }
+        }    
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Halo Mega Construx</h1>
+        <h2>Las Mejores Figuras de Coleccion</h2>
+    </header>
+
+    <div>
+        <p>
+            <strong>.</strong>
+            <img src="image/inqui (1).png" alt="Inquisidor" class="figura-img">
+            Una de las figuras mas emblematicas de la linea Mega Construx. Destaca por su armadura detallada de la Sangheili Honor Guard o su clasica armadura de Elite Arbiter, incluyendo su espada de energia y gran articulacion.
+        </p>
+
+        <p>
+            <strong>.</strong>
+            <img src="image/Captura de pantalla 2026-09-30 233341.png" alt="Noble 6" class="figura-img">
+            Directo desde Halo Reach, esta figura representa al Spartan solitario del equipo Noble. Cuenta con la armadura Mark V [B] detallada en tono gris oscuro y sus armas caracteristicas para recrear la caida de Reach.
+        </p>
+
+        <p>
+            <strong>.</strong>
+            <img src="image/Captura de pantalla 2026-09-30 233436.png" alt="Jefe Maestro" class="figura-img">
+            El héroe legendario de la saga cuenta con multiples variantes en la linea Mega Construx, desde la version clasica de Halo 1 hasta la armadura Mark VI de Halo Infinite, equipada con el rifle de asalto caracteristico.
+        </p>
+
+     
+        <a href="Ir a indice.html">
+            <img src="image/rever.png" alt="Ir al Menú" width="150">
+        </a>
+    </p>
+</body>
+</html>

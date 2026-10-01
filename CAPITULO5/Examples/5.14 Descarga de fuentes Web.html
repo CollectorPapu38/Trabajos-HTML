@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.15: fuentesincrustadas.html -->
+<!-- Incrustación de fuentes para usar en páginas Web. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Fuentes incrustadas</title>
+      <link href = 'http://fonts.googleapis.com/css?family=Calligraffitti'
+         rel = 'stylesheet' type = 'text/css'>
+      <style type = "text/css">
+         body
+         {
+            font-family: "Calligraffitti";
+            font-size: 48px;
+            text-shadow: 3px 3px 3px DimGrey;
+         }
+      </style>
+   </head>
+   <body>
+      <div>
+         <b>Incrustando la fuente Web de Google "Calligraffitti"</b>
+      </div>
+
+      <a href="Indice todo.html">
+         <img src="image/rever.png" alt="Ir al Menú" width="150">
+      </a>
+      <!-- 
+         Para obtener la fuente Calligraffitti de Google, vaya a http://www.google.com/webfonts 
+         y use el cuadro de búsqueda en el sitio para buscar la fuente: "Calligraffitti". 
+         A continuación, haga clic en Quick-use para obtener el vínculo (link) a la hoja de estilos 
+         que contiene la regla @font-face. Coloque ese elemento link en la sección de encabezado 
+         de su documento (líneas 9 y 10). La hoja de estilos de CSS referenciada contiene las siguientes reglas de CSS:
+
+         @media screen {
+            @font-face {
+               font-family: 'Calligraffitti';
+               font-style: normal;
+               font-weight: normal;
+               src: local('Calligraffitti'),
+                  url('http://themes.googleusercontent.com/static/fonts/calligraffitti/v1/vLVN2Y-z65rVu1R7lWdvyKIZAuDcNtpCWuPSaIR0Ie8.woff') format('woff');
+            }
+         }
+      -->
+   </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<!-- Fig. 5.14: fusionarimagenes.html -->
+<!-- Fusionar una imagen en otra mediante CSS3. -->
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>Fusi&oacute;n de im&aacute;genes</title>
+      <style type = "text/css">
+         #portada
+         {
+            position: relative;
+            margin: 0 auto;
+            width: 400px;
+            height: 300px;
+         }
+         #portada img
+         {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            -webkit-transition: opacity 3s linear;
+            transition: opacity 3s linear;
+         }
+         #portada:hover img.img5
+         { opacity: 0; }
+         #portada:hover img.img4
+         { opacity: 0; }
+         #portada:hover img.img3
+         { opacity: 0; }
+         #portada:hover img.img2
+         { opacity: 0; }
+      </style>
+   </head>
+   <body>
+      <h2>Puchele al camello</h2>
+      <a href="Ir a indice.html">
+         <img src="image/rever.png" alt="Ir al Menú" width="150">
+      </a>
+
+      <div id = "portada">
+         <img class = "img1" src = "image/inqui (1).png" alt = "Imagen 1">
+         <img class = "img2" src = "image/inqui (2).png" alt = "Imagen 2">
+         <img class = "img3" src = "image/cpphtp.png" alt = "Imagen 3">
+         <img class = "img4" src = "image/daft.jpg" alt = "Imagen 4">
+         <img class = "img5" src = "image/camello.jpg" alt = "Imagen 5">
+      </div>
+   </body>
+</html>
