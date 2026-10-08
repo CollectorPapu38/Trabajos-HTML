@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- Fig. 6.14: bienvenido5.html -->
+<!-- Uso de operadores de igualdad y relacionales. -->
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Uso de operadores relacionales</title>
+
+     
+      <script>
+
+         // Declaración de variables y creación de objeto Date
+         var nombre; // cadena introducida por el usuario
+         var ahora = new Date(); // fecha y hora actuales
+         var hora = ahora.getHours(); // hora actual en formato de 24 horas (0-23)
+
+         // Lee el nombre ingresado mediante el cuadro emergente prompt
+         // lee el nombre del cuadro indicador como una cadena
+         nombre = window.prompt( "Escriba su nombre" );
+
+         // Operador relacional (<): determina si la hora actual es menor a 12 (mañana)
+         // determina si es de mañana
+         if ( hora < 12 )
+            document.write( "<h1>Buenos d&iacute;as, " );
+
+         // Operador relacional (>=): determina si la hora es mayor o igual a 12 (PM)
+         // determina si la hora es PM
+         if ( hora >= 12 )
+         {
+            // Convierte de formato 24 horas a formato 12 horas
+            hora = hora - 12;
+
+            // Instrucciones if anidadas para determinar tarde o noche
+            // determina si es antes de las 6 PM
+            if ( hora < 6 )
+               document.write( "<h1>Buenas tardes, " );
+
+            // determina si es después de las 6 PM
+            if ( hora >= 6 )
+               document.write( "<h1>Buenas noches, " );
+         } // end if
+
+         // Concatena y despliega el nombre junto con la bienvenida
+         document.writeln( nombre +
+            ", bienvenido a la programaci&oacute;n en JavaScript</h1>" );
+
+      </script>
+
+
+   </head>
+   <body>
+
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+
+   </body>
+</html>

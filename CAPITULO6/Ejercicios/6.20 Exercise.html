@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- Ejercicio 6.20: ej6-20.html -->
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 6.20</title>
+      <script>
+         var s1, s2, s3, s4, s5;
+         var n1, n2, n3, n4, n5;
+         var menor, mayor;
+
+         s1 = window.prompt( "Bienvenido, acontinucion siga la indicacion para encontrar el numero mas grande y el mas chico \n \nColoque Primer numero:" );
+         s2 = window.prompt( "Coloque Segundo numero:" );
+         s3 = window.prompt( "Coloque Tercero numero:" );
+         s4 = window.prompt( "Coloque Cuarto numero:" );
+         s5 = window.prompt( "Coloque Quinto numero:" );
+
+         n1 = parseInt( s1 );
+         n2 = parseInt( s2 );
+         n3 = parseInt( s3 );
+         n4 = parseInt( s4 );
+         n5 = parseInt( s5 );
+
+         menor = n1;
+         if ( n2 < menor ) menor = n2;
+         if ( n3 < menor ) menor = n3;
+         if ( n4 < menor ) menor = n4;
+         if ( n5 < menor ) menor = n5;
+
+         mayor = n1;
+         if ( n2 > mayor ) mayor = n2;
+         if ( n3 > mayor ) mayor = n3;
+         if ( n4 > mayor ) mayor = n4;
+         if ( n5 > mayor ) mayor = n5;
+
+         document.writeln( "<h1>Resultados</h1>" );
+         document.writeln( "El menor número es: " + menor + "<br>" );
+         document.writeln( "El mayor número es: " + mayor + "<br>" );
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

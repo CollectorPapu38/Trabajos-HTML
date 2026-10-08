@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- Ejercicio 6.16: ej6-16.html -->
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 6.16</title>
+      <script>
+         var primerNumero;
+         var segundoNumero;
+         var numero1;
+         var numero2;
+         var suma;
+         var producto;
+         var diferencia;
+         var cociente;
+
+         primerNumero = window.prompt( "Bienvenido, acontinucion siga la indicacion para realizar unas operaciones basicas. \n \n Escriba el primer\nnúmero:" );
+         segundoNumero = window.prompt( "Escriba el segundo número:" );
+
+         numero1 = parseInt( primerNumero );
+         numero2 = parseInt( segundoNumero );
+
+         suma = numero1 + numero2;
+         producto = numero1 * numero2;
+         diferencia = numero1 - numero2;
+         cociente = numero1 / numero2;
+
+         document.writeln( "<h1>Resultados:</h1>" );
+         document.writeln( "La suma es " + suma + "<br>" );
+         document.writeln( "El producto es " + producto + "<br>" );
+         document.writeln( "La diferencia es " + diferencia + "<br>" );
+         document.writeln( "El cociente es " + cociente + "<br>" );
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

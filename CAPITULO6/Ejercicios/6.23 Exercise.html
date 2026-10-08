@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- Ejercicio 6.23: ej6-23.html -->
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 6.23</title>
+      <script>
+         var s1, s2, s3;
+         var n1, n2, n3;
+         var positivos = 0;
+         var negativos = 0;
+         var ceros = 0;
+
+         s1 = window.prompt( "Primer número:" );
+         s2 = window.prompt( "Segundo número:" );
+         s3 = window.prompt( "Tercer número:" );
+
+         n1 = parseInt( s1 );
+         n2 = parseInt( s2 );
+         n3 = parseInt( s3 );
+
+         if ( n1 > 0 ) positivos = positivos + 1;
+         if ( n1 < 0 ) negativos = negativos + 1;
+         if ( n1 == 0 ) ceros = ceros + 1;
+
+         if ( n2 > 0 ) positivos = positivos + 1;
+         if ( n2 < 0 ) negativos = negativos + 1;
+         if ( n2 == 0 ) ceros = ceros + 1;
+
+         if ( n3 > 0 ) positivos = positivos + 1;
+         if ( n3 < 0 ) negativos = negativos + 1;
+         if ( n3 == 0 ) ceros = ceros + 1;
+
+         document.writeln( "<h1>Conteo de números</h1>" );
+         document.writeln( "Positivos: " + positivos + "<br>" );
+         document.writeln( "Negativos: " + negativos + "<br>" );
+         document.writeln( "Ceros: " + ceros + "<br>" );
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>
