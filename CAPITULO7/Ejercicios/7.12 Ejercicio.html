@@ -1,0 +1,62 @@
+<!-- 7.12 Ejercicio
+Inicio (Fase de inicialización)
+    Pedir número de cuenta
+    Convertir a entero
+
+Fase de procesamiento
+    Pedir saldo inicial del mes
+    Pedir total de cargos aplicados en el mes
+    Pedir total de créditos aplicados en el mes
+    Pedir límite de crédito permitido
+
+    Convertir todas las entradas a enteros
+
+    Calcular nuevoSaldo = saldoInicial + cargos - creditos
+
+Fase de terminación
+    Mostrar el nuevo saldo en pantalla
+    Si nuevoSaldo > limiteCredito
+        Mostrar mensaje "Se excedió el límite de su crédito"
+    Fin Si
+Fin -->
+
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 7.12 - Límite de Crédito</title>
+      <script>
+         var cuentaTexto, saldoInicialTexto, cargosTexto, creditosTexto, limiteTexto;
+         var cuenta, saldoInicial, cargos, creditos, limiteCredito, nuevoSaldo;
+
+         cuentaTexto = window.prompt( "Escriba el número de cuenta:" );
+         saldoInicialTexto = window.prompt( "Escriba el saldo inicial:" );
+         cargosTexto = window.prompt( "Escriba los cargos del mes:" );
+         creditosTexto = window.prompt( "Escriba los créditos del mes:" );
+         limiteTexto = window.prompt( "Escriba el límite de crédito permitido:" );
+
+         cuenta = parseInt( cuentaTexto );
+         saldoInicial = parseInt( saldoInicialTexto );
+         cargos = parseInt( cargosTexto );
+         creditos = parseInt( creditosTexto );
+         limiteCredito = parseInt( limiteTexto );
+
+         nuevoSaldo = saldoInicial + cargos - creditos;
+
+         document.writeln( "<h1>Estado de Cuenta: " + cuenta + "</h1>" );
+         document.writeln( "<p>Nuevo saldo: $" + nuevoSaldo + "</p>" );
+
+         if ( nuevoSaldo > limiteCredito )
+         {
+            document.writeln( "<h2>Se excedió el límite de su crédito</h2>" );
+         }
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

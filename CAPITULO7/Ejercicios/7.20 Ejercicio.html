@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 7.20</title>
+      <script>
+         var numeroTexto;
+         var numero = 0;
+
+         while ( numero < 10000 || numero > 99999 )
+         {
+            numeroTexto = window.prompt( "Escriba un entero de cinco dígitos:", "0" );
+            numero = parseInt( numeroTexto );
+
+            if ( numero < 10000 || numero > 99999 )
+            {
+               window.alert( "El número debe ser exactamente de cinco dígitos." );
+            }
+         }
+
+         var d1 = parseInt( numero / 10000 );
+         var d2 = parseInt( numero / 1000 ) % 10;
+         var d4 = parseInt( numero / 10 ) % 10;
+         var d5 = numero % 10;
+
+         if ( d1 == d5 && d2 == d4 )
+         {
+            document.writeln( "<h1>El número " + numero + " es un palíndromo</h1>" );
+         }
+         else
+         {
+            document.writeln( "<h1>El número " + numero + " NO es un palíndromo</h1>" );
+         }
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

@@ -1,0 +1,151 @@
+<!-- 7.11 Ejercicio
+
+ Inicio (Fase de inicialización)
+
+    Inicializar totalKilometros a 0
+
+    Inicializar totalLitros a 0
+
+
+
+Fase de procesamiento
+
+    Pedir los kilómetros conducidos (-1 para salir)
+
+    Convertir kilómetros a número flotante
+
+
+
+    Mientras kilómetros sea diferente de -1
+
+        Pedir los litros usados en este viaje
+
+        Convertir litros a número flotante
+
+
+
+        Calcular KPLDelViaje = kilometros / litros
+
+        Acumular totalKilometros = totalKilometros + kilometros
+
+        Acumular totalLitros = totalLitros + litros
+
+        Calcular KPLTotal = totalKilometros / totalLitros
+
+
+
+        Manejar resultado en pantalla para el viaje actual y acumulado
+
+
+
+        Pedir los kilómetros conducidos del siguiente viaje (-1 para salir)
+
+        Convertir kilómetros a número flotante
+
+    Fin Mientras
+
+
+
+Fase de terminación
+
+    Si totalLitros no es cero
+
+        Mostrar reporte final en el documento HTML
+
+    Fin Si
+
+Fin -->
+
+
+
+<!DOCTYPE html>
+
+
+
+<html>
+
+   <head>
+
+      <meta charset="utf-8">
+
+      <title>Ejercicio 7.11 - Rendimiento de Gasolina</title>
+
+      <script>
+
+         var kilometrosTexto;
+
+         var litrosTexto;
+
+         var kilometros;
+
+         var litros;
+
+         var kplViaje;
+
+         var totalKilometros = 0;
+
+         var totalLitros = 0;
+
+         var kplTotal;
+
+
+
+         kilometrosTexto = window.prompt( "Escriba los kilómetros conducidos (-1 para terminar):", "0" );
+
+         kilometros = parseFloat( kilometrosTexto );
+
+
+
+         document.writeln( "<h1>Registro de Kilometraje por Litro</h1>" );
+
+
+
+         while ( kilometros != -1 )
+
+         {
+
+            litrosTexto = window.prompt( "Escriba los litros usados en este viaje:", "0" );
+
+            litros = parseFloat( litrosTexto );
+
+
+
+            kplViaje = kilometros / litros;
+
+            totalKilometros = totalKilometros + kilometros;
+
+            totalLitros = totalLitros + litros;
+
+            kplTotal = totalKilometros / totalLitros;
+
+
+
+            document.writeln( "<p>Viaje -> KPL obtenidos: " + kplViaje +
+
+               " | KPL acumulados totales: " + kplTotal + "</p>" );
+
+
+
+            kilometrosTexto = window.prompt( "Escriba los kilómetros conducidos (-1 para terminar):", "0" );
+
+            kilometros = parseFloat( kilometrosTexto );
+
+         }
+
+      </script>
+
+   </head>
+
+   <body>
+
+      <br>
+
+      <a href="Indi.html">
+
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+
+      </a>
+
+   </body>
+
+</html> 

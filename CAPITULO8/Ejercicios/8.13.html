@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 8.13</title>
+      <style>
+         body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+         h2 { color: #003366; border-bottom: 2px solid #003366; padding-bottom: 5px; }
+         ul { margin-bottom: 20px; }
+      </style>
+      <script>
+
+         function evaluarSwitch(k_inicial) {
+            var k = k_inicial;
+            switch ( k )
+            {
+               case 1: 
+                  break; 
+               case 2: 
+               case 3:
+                  ++k; 
+                  break; 
+               case 4:
+                  --k;
+                  break;
+               default:
+                  k *= 3;
+            }
+            return k; // x = k
+         }
+
+         document.writeln( "<h2>Resultados del Ejercicio 8.13</h2>" );
+         document.writeln( "<ul>" );
+         document.writeln( "<li>Si k = 1, x = " + evaluarSwitch(1) + "</li>" );
+         document.writeln( "<li>Si k = 2, x = " + evaluarSwitch(2) + "</li>" );
+         document.writeln( "<li>Si k = 3, x = " + evaluarSwitch(3) + "</li>" );
+         document.writeln( "<li>Si k = 4, x = " + evaluarSwitch(4) + "</li>" );
+         document.writeln( "<li>Si k = 10, x = " + evaluarSwitch(10) + "</li>" );
+         document.writeln( "</ul>" );
+
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

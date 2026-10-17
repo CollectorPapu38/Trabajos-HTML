@@ -1,0 +1,64 @@
+<!-- 7.14 Ejercicio
+Inicio (Fase de inicialización)
+    Inicializar contadorEmpleado = 1
+
+Fase de procesamiento
+    Mientras contadorEmpleado <= 3
+        Pedir horas trabajadas la semana pasada
+        Pedir tarifa por hora
+        Convertir entradas a flotantes
+
+        Si horas <= 40
+            sueldoBruto = horas * tarifa
+        Sino
+            sueldoBruto = (40 * tarifa) + ((horas - 40) * (tarifa * 1.5))
+        Fin Si
+
+        Mostrar el sueldo bruto del empleado en HTML
+
+        Incrementar contadorEmpleado = contadorEmpleado + 1
+    Fin Mientras
+Fin -->
+
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 7.14 - Sueldo Bruto</title>
+      <script>
+         var horasTexto;
+         var tarifaTexto;
+         var horas;
+         var tarifa;
+         var sueldoBruto;
+         var contadorEmpleado = 1;
+
+         document.writeln( "<h1>Sueldo Bruto de Empleados</h1>" );
+
+         while ( contadorEmpleado <= 3 )
+         {
+            horasTexto = window.prompt( "Empleado " + contadorEmpleado + " - Horas trabajadas:", "0" );
+            tarifaTexto = window.prompt( "Empleado " + contadorEmpleado + " - Tarifa por hora:", "0" );
+
+            horas = parseFloat( horasTexto );
+            tarifa = parseFloat( tarifaTexto );
+
+            if ( horas <= 40 )
+               sueldoBruto = horas * tarifa;
+            else
+               sueldoBruto = (40 * tarifa) + ((horas - 40) * (tarifa * 1.5));
+
+            document.writeln( "<p>Empleado " + contadorEmpleado + " - Sueldo bruto: $" + sueldoBruto + "</p>" );
+
+            contadorEmpleado = contadorEmpleado + 1;
+         }
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

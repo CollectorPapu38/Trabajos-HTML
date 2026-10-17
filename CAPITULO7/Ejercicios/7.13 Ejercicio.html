@@ -1,0 +1,57 @@
+<!-- 7.13 Ejercicio
+Inicio (Fase de inicialización)
+    Inicializar totalVentas = 0
+
+Fase de procesamiento
+    Pedir cantidad vendida del Artículo 1
+    Pedir cantidad vendida del Artículo 2
+    Pedir cantidad vendida del Artículo 3
+    Pedir cantidad vendida del Artículo 4
+
+    Convertir las cantidades a enteros
+
+    Calcular totalVentas = (cant1 * 239.99) + (cant2 * 129.75) + (cant3 * 99.95) + (cant4 * 350.89)
+    Calcular ingresos = 200 + (totalVentas * 0.09)
+
+Fase de terminación
+    Mostrar total de ventas brutas en HTML
+    Mostrar ingresos totales calculados
+Fin -->
+
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 7.13 - Comisión de Ventas</title>
+      <script>
+         var cant1Texto, cant2Texto, cant3Texto, cant4Texto;
+         var cant1, cant2, cant3, cant4;
+         var totalVentas;
+         var ingresos;
+
+         cant1Texto = window.prompt( "Cantidad vendida del Artículo 1 ($239.99):", "0" );
+         cant2Texto = window.prompt( "Cantidad vendida del Artículo 2 ($129.75):", "0" );
+         cant3Texto = window.prompt( "Cantidad vendida del Artículo 3 ($99.95):", "0" );
+         cant4Texto = window.prompt( "Cantidad vendida del Artículo 4 ($350.89):", "0" );
+
+         cant1 = parseInt( cant1Texto );
+         cant2 = parseInt( cant2Texto );
+         cant3 = parseInt( cant3Texto );
+         cant4 = parseInt( cant4Texto );
+
+         totalVentas = (cant1 * 239.99) + (cant2 * 129.75) + (cant3 * 99.95) + (cant4 * 350.89);
+         ingresos = 200 + (totalVentas * 0.09);
+
+         document.writeln( "<h1>Reporte de Ingresos del Vendedor</h1>" );
+         document.writeln( "<p>Ventas brutas totales: $" + totalVentas + "</p>" );
+         document.writeln( "<p>Ingresos totales de la semana: $" + ingresos + "</p>" );
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

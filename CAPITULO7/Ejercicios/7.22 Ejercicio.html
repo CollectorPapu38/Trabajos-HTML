@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 7.22 - Cifrado de Datos</title>
+      <script>
+         var numeroTexto;
+         var numero = -1;
+
+         while ( numero < 1000 || numero > 9999 )
+         {
+            numeroTexto = window.prompt( "Escriba un entero de cuatro dígitos para cifrar:", "0" );
+            numero = parseInt( numeroTexto );
+
+            if ( numero < 1000 || numero > 9999 )
+            {
+               window.alert( "El número debe ser estrictamente de cuatro dígitos." );
+            }
+         }
+
+         var d1 = parseInt( numero / 1000 );
+         var d2 = parseInt( numero / 100 ) % 10;
+         var d3 = parseInt( numero / 10 ) % 10;
+         var d4 = numero % 10;
+
+         d1 = ( d1 + 7 ) % 10;
+         d2 = ( d2 + 7 ) % 10;
+         d3 = ( d3 + 7 ) % 10;
+         d4 = ( d4 + 7 ) % 10;
+
+         var temporal1 = d1;
+         d1 = d3;
+         d3 = temporal1;
+
+         var temporal2 = d2;
+         d2 = d4;
+         d4 = temporal2;
+
+         var numeroCifrado = "" + d1 + d2 + d3 + d4;
+
+         document.writeln( "<h1>Resultado del Cifrado</h1>" );
+         document.writeln( "<p>El número original era: " + numero + "</p>" );
+         document.writeln( "<p>El número cifrado es: " + numeroCifrado + "</p>" );
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

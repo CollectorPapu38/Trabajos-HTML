@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>8.9</title>
+      <script>
+
+         document.writeln( "<h3>Gráfico de barras</h3>" );
+
+         for ( var i = 1; i <= 5; ++i )
+         {
+            var numero = parseInt( window.prompt( "Introduzca un número entre 1 y 30 (" + i + " de 5):", "5" ) );
+
+            if ( numero >= 1 && numero <= 30 )
+            {
+               document.writeln( "<p>" );
+               for ( var j = 1; j <= numero; ++j )
+               {
+                  document.writeln( "*" );
+               }
+               document.writeln( " (" + numero + ")</p>" );
+            }
+            else
+            {
+               document.writeln( "<p>Número fuera de rango.</p>" );
+            }
+         }
+
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

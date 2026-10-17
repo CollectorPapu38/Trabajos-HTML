@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>8.6</title>
+      <script>
+
+         var totalValores = parseInt( window.prompt( "Introduzca el número de valores:", "3" ) );
+
+         if ( totalValores > 0 )
+         {
+            var menor = parseInt( window.prompt( "Introduzca un entero no negativo:", "0" ) );
+
+            for ( var i = 2; i <= totalValores; ++i )
+            {
+               var valor = parseInt( window.prompt( "Introduzca un entero no negativo:", "0" ) );
+
+               if ( valor < valor ? valor : menor ) // o comparando directamente:
+               if ( valor < menor )
+                  menor = valor;
+            }
+
+            document.writeln( "<h3>El número menor de los " + totalValores + " introducidos es: " + menor + "</h3>" );
+         }
+         else
+         {
+            document.writeln( "<h3>Debe ingresar un número mayor a cero.</h3>" );
+         }
+
+      </script>
+   </head>
+   <body>
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>
