@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.22</title>
+      <script>
+         var num1, num2, respuestaCorrecta;
+
+         function generarPregunta()
+         {
+            num1 = Math.floor( Math.random() * 9 ) + 1;
+            num2 = Math.floor( Math.random() * 9 ) + 1;
+            respuestaCorrecta = num1 * num2;
+            document.getElementById( "pregunta" ).innerHTML = "¿Cuánto es " + num1 + " por " + num2 + "?";
+            document.getElementById( "respuesta" ).value = "";
+            document.getElementById( "mensaje" ).innerHTML = "";
+         }
+
+         function verificarRespuesta()
+         {
+            var respuestaUsuario = parseInt( document.getElementById( "respuesta" ).value );
+            var mensajeP = document.getElementById( "mensaje" );
+
+            if ( respuestaUsuario === respuestaCorrecta )
+            {
+               mensajeP.innerHTML = "<strong>¡Muy bien!</strong>";
+               setTimeout( generarPregunta, 1500 );
+            }
+            else
+            {
+               mensajeP.innerHTML = "<strong>No. Intente de nuevo.</strong>";
+               document.getElementById( "respuesta" ).value = "";
+            }
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnEnviar" ).addEventListener( "click", verificarRespuesta, false );
+            generarPregunta();
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Instrucción Asistida por Computadora (Multiplicación)</h3>
+      <p id="pregunta"></p>
+      <form action="#">
+         <input id="respuesta" type="text">
+         <input id="btnEnviar" type="button" value="Enviar Respuesta">
+      </form>
+      <p id="mensaje"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

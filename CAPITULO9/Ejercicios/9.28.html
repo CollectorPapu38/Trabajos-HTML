@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.28</title>
+      <script>
+         var saldoBanco = 1000;
+
+         function conversacionAleatoria()
+         {
+            var msgs = [
+               "¡Así que se va a quedar en bancarrota?",
+               "¡Vamos, arriésguese!",
+               "¡Está teniendo éxito!",
+               "¡Ahora es momento de cambiar sus fichas!"
+            ];
+            return msgs[ Math.floor( Math.random() * msgs.length ) ];
+         }
+
+         function jugarCraps()
+         {
+            var apuesta = parseFloat( document.getElementById( "apuestaInput" ).value );
+            var mensajeP = document.getElementById( "mensaje" );
+
+            if ( isNaN( apuesta ) || apuesta <= 0 || apuesta > saldoBanco )
+            {
+               mensajeP.innerHTML = "Apuesta inválida. Verifique su saldo ($" + saldoBanco + ").";
+               return;
+            }
+
+            var dado1 = Math.floor( Math.random() * 6 ) + 1;
+            var dado2 = Math.floor( Math.random() * 6 ) + 1;
+            var suma = dado1 + dado2;
+
+            var resultadoJuego = "";
+
+            if ( suma === 7 || suma === 11 )
+            {
+               saldoBanco += apuesta;
+               resultadoJuego = "¡Ganó! Suma: " + suma + ". ";
+            }
+            else if ( suma === 2 || suma === 3 || suma === 12 )
+            {
+               saldoBanco -= apuesta;
+               resultadoJuego = "Craps. Perdió. Suma: " + suma + ". ";
+            }
+            else
+            {
+               resultadoJuego = "Punto establecido: " + suma + " (Empate en simulación básica). ";
+            }
+
+            resultadoJuego += conversacionAleatoria() + "<br>Saldo actual: <strong>$" + saldoBanco + "</strong>";
+
+            if ( saldoBanco <= 0 )
+            {
+               resultadoJuego += "<br><strong>¡Lo siento. Está en bancarrota!</strong>";
+               document.getElementById( "btnJugar" ).disabled = true;
+            }
+
+            mensajeP.innerHTML = resultadoJuego;
+            document.getElementById( "saldo" ).innerHTML = "Saldo en Banco: $" + saldoBanco;
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnJugar" ).addEventListener( "click", jugarCraps, false );
+            document.getElementById( "saldo" ).innerHTML = "Saldo en Banco: $" + saldoBanco;
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Craps con Apuestas</h3>
+      <p id="saldo"></p>
+      <form action="#">
+         Introduce tu apuesta: <input id="apuestaInput" type="text">
+         <input id="btnJugar" type="button" value="Jugar Craps">
+      </form>
+      <p id="mensaje"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

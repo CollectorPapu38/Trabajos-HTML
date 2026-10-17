@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.27</title>
+      <script>
+         var num1, num2, respuestaCorrecta, operador;
+
+         function generarProblema()
+         {
+            var nivel = parseInt( document.getElementById( "nivel" ).value );
+            var tipo = parseInt( document.getElementById( "tipo" ).value );
+
+            var max = Math.pow( 10, nivel );
+            num1 = Math.floor( Math.random() * max );
+            num2 = Math.floor( Math.random() * max );
+
+            if ( tipo === 5 )
+            {
+               tipo = Math.floor( Math.random() * 4 ) + 1;
+            }
+
+            switch( tipo )
+            {
+               case 1:
+                  operador = "+";
+                  respuestaCorrecta = num1 + num2;
+                  break;
+               case 2:
+                  operador = "-";
+                  respuestaCorrecta = num1 - num2;
+                  break;
+               case 3:
+                  operador = "*";
+                  respuestaCorrecta = num1 * num2;
+                  break;
+               case 4:
+                  if ( num2 === 0 ) num2 = 1;
+                  operador = "/";
+                  respuestaCorrecta = parseFloat( ( num1 / num2 ).toFixed( 2 ) );
+                  break;
+            }
+
+            document.getElementById( "pregunta" ).innerHTML = "¿Cuánto es " + num1 + " " + operador + " " + num2 + "?";
+            document.getElementById( "respuesta" ).value = "";
+            document.getElementById( "mensaje" ).innerHTML = "";
+         }
+
+         function verificar()
+         {
+            var resp = parseFloat( document.getElementById( "respuesta" ).value );
+            if ( resp === respuestaCorrecta )
+            {
+               document.getElementById( "mensaje" ).innerHTML = "<strong>¡Correcto!</strong>";
+               setTimeout( generarProblema, 1200 );
+            }
+            else
+            {
+               document.getElementById( "mensaje" ).innerHTML = "<strong>Incorrecto. Intente de nuevo.</strong>";
+               document.getElementById( "respuesta" ).value = "";
+            }
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnGenerar" ).addEventListener( "click", generarProblema, false );
+            document.getElementById( "btnEnviar" ).addEventListener( "click", verificar, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>CAI Mejorado (Nivel y Tipos de Operaciones)</h3>
+      <form action="#">
+         Nivel (Dígitos): <input id="nivel" type="text" value="1" size="3"> 
+         Tipo (1:+, 2:-, 3:*, 4:/, 5:Mixto): <input id="tipo" type="text" value="3" size="3">
+         <input id="btnGenerar" type="button" value="Iniciar / Nuevo"><br><br>
+      </form>
+      <p id="pregunta"></p>
+      <form action="#">
+         <input id="respuesta" type="text">
+         <input id="btnEnviar" type="button" value="Responder">
+      </form>
+      <p id="mensaje"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

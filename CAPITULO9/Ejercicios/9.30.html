@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.30</title>
+      <script>
+         function misterio( a, b )
+         {
+            if ( b === 1 ) return a;
+            else return a + misterio( a, b - 1 );
+         }
+
+         function ejecutar()
+         {
+            // Ejemplo ejecutando misterio( 3, 4 ) que equivale a multiplicar 3 * 4 recursivamente mediante sumas
+            var res = misterio( 3, 4 );
+            document.getElementById( "resultado" ).innerHTML = "Resultado de misterio(3, 4): <strong>" + res + "</strong> (Calcula la multiplicación de a * b mediante sumas recursivas)";
+         }
+
+         window.addEventListener( "load", ejecutar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Función Misterio (Análisis Recursivo)</h3>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

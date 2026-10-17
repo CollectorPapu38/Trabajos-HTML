@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.18 </title>
+      <script>
+         function calcularMinimo()
+         {
+            var n1 = parseFloat( document.getElementById( "n1" ).value );
+            var n2 = parseFloat( document.getElementById( "n2" ).value );
+            var n3 = parseFloat( document.getElementById( "n3" ).value );
+            var min = minimo3( n1, n2, n3 );
+            document.getElementById( "resultado" ).innerHTML = "El valor más pequeño es: <strong>" + min + "</strong>";
+         }
+
+         function minimo3( a, b, c )
+         {
+            return Math.min( a, b, c );
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "boton" ).addEventListener( "click", calcularMinimo, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>9.18 Mínimo de tres números</h3>
+      <form action="#">
+         Número 1: <input id="n1" type="text"><br><br>
+         Número 2: <input id="n2" type="text"><br><br>
+         Número 3: <input id="n3" type="text"><br><br>
+         <input id="boton" type="button" value="Calcular Mínimo">
+      </form>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

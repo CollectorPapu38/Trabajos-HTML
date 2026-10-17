@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.8</title>
+      <script>
+         var totalRecibos = 0;
+
+         function calcularCargos( horas )
+         {
+            if ( horas <= 3 ) return 2.00;
+            var cargo = 2.00 + ( Math.ceil( horas - 3 ) * 0.50 );
+            return ( cargo > 10.00 ) ? 10.00 : cargo;
+         }
+
+         function procesar()
+         {
+            var horas = parseFloat( document.getElementById( "horasInput" ).value );
+            var cargo = calcularCargos( horas );
+            totalRecibos += cargo;
+
+            document.getElementById( "actual" ).innerHTML = "Cargo actual: $" + cargo.toFixed( 2 );
+            document.getElementById( "total" ).innerHTML = "Total corriente: $" + totalRecibos.toFixed( 2 );
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "boton" ).addEventListener( "click", procesar, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Cargos de Estacionamiento</h3>
+      <form action="#">
+         Horas: <input id="horasInput" type="text">
+         <input id="boton" type="button" value="Calcular">
+      </form>
+      <p id="actual"></p>
+      <p id="total"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

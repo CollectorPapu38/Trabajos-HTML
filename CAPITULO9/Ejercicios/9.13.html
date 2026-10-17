@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.13</title>
+      <script>
+         function calcularPotencia()
+         {
+            var base = parseInt( document.getElementById( "baseInput" ).value );
+            var exponente = parseInt( document.getElementById( "exponenteInput" ).value );
+
+            if ( isNaN( base ) || isNaN( exponente ) )
+            {
+               document.getElementById( "resultado" ).innerHTML = "Por favor, introduce números enteros válidos.";
+               return;
+            }
+
+            var resultado = potenciaEntera( base, exponente );
+            document.getElementById( "resultado" ).innerHTML = base + " elevado a la " + exponente + " es: " + resultado;
+         }
+
+         function potenciaEntera( b, e )
+         {
+            var total = 1;
+            for ( var i = 1; i <= e; ++i )
+            {
+               total *= b;
+            }
+            return total;
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "boton" ).addEventListener( "click", calcularPotencia, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Cálculo de Potencia Entera</h3>
+      <form action="#">
+         Base: <input id="baseInput" type="text"><br><br>
+         Exponente: <input id="exponenteInput" type="text"><br><br>
+         <input id="boton" type="button" value="Calcular Potencia">
+      </form>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

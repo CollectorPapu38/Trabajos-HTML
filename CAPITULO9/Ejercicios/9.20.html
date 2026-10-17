@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.20</title>
+      <script>
+         function calcularPuntos()
+         {
+            var promedio = parseFloat( document.getElementById( "promedioInput" ).value );
+            var puntos = puntosCalidad( promedio );
+            document.getElementById( "resultado" ).innerHTML = "Puntos de calidad: <strong>" + puntos + "</strong>";
+         }
+
+         function puntosCalidad( p )
+         {
+            if ( p >= 90 && p <= 100 ) return 4;
+            else if ( p >= 80 && p <= 89 ) return 3;
+            else if ( p >= 70 && p <= 79 ) return 2;
+            else if ( p >= 60 && p <= 69 ) return 1;
+            else return 0;
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "boton" ).addEventListener( "click", calcularPuntos, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>9.20 Puntos de Calidad</h3>
+      <form action="#">
+         Promedio del estudiante: <input id="promedioInput" type="text"><br><br>
+         <input id="boton" type="button" value="Obtener Puntos">
+      </form>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

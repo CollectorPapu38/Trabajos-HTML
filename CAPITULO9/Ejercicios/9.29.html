@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.29</title>
+      <script>
+         function potenciaRecursiva( base, exponente )
+         {
+            if ( exponente === 1 ) return base;
+            else return base * potenciaRecursiva( base, exponente - 1 );
+         }
+
+         function calcular()
+         {
+            var b = parseInt( document.getElementById( "base" ).value );
+            var e = parseInt( document.getElementById( "exponente" ).value );
+
+            if ( isNaN( b ) || isNaN( e ) || e < 1 )
+            {
+               document.getElementById( "resultado" ).innerHTML = "Introduce valores válidos (exponente >= 1).";
+               return;
+            }
+
+            var res = potenciaRecursiva( b, e );
+            document.getElementById( "resultado" ).innerHTML = "Resultado: <strong>" + res + "</strong>";
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnCalcular" ).addEventListener( "click", calcular, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Potencia Recursiva</h3>
+      <form action="#">
+         Base: <input id="base" type="text"><br><br>
+         Exponente (>=1): <input id="exponente" type="text"><br><br>
+         <input id="btnCalcular" type="button" value="Calcular">
+      </form>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

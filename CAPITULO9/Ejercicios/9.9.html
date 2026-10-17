@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.9</title>
+      <script>
+         function ejecutarDistancia()
+         {
+            var x1 = parseFloat( document.getElementById( "x1" ).value );
+            var y1 = parseFloat( document.getElementById( "y1" ).value );
+            var x2 = parseFloat( document.getElementById( "x2" ).value );
+            var y2 = parseFloat( document.getElementById( "y2" ).value );
+
+            var d = distancia( x1, y1, x2, y2 );
+            document.getElementById( "resultado" ).innerHTML = "Distancia: " + d.toFixed( 4 );
+         }
+
+         function distancia( x1, y1, x2, y2 )
+         {
+            return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "boton" ).addEventListener( "click", ejecutarDistancia, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Distancia entre Dos Puntos</h3>
+      <form action="#">
+         X1: <input id="x1" type="text"> Y1: <input id="y1" type="text"><br><br>
+         X2: <input id="x2" type="text"> Y2: <input id="y2" type="text"><br><br>
+         <input id="boton" type="button" value="Calcular Distancia">
+      </form>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

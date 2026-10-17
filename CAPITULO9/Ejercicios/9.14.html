@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.14</title>
+      <script>
+         function verificarMultiplo()
+         {
+            var num1 = parseInt( document.getElementById( "num1" ).value );
+            var num2 = parseInt( document.getElementById( "num2" ).value );
+            var resultado = multiplo( num1, num2 );
+            document.getElementById( "resultado" ).innerHTML = "¿Es " + num2 + " múltiplo de " + num1 + "?: <strong>" + resultado + "</strong>";
+         }
+
+         function multiplo( a, b )
+         {
+            return ( b % a === 0 );
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "boton" ).addEventListener( "click", verificarMultiplo, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>9.14 Función Múltiplo</h3>
+      <form action="#">
+         Número 1: <input id="num1" type="text"><br><br>
+         Número 2: <input id="num2" type="text"><br><br>
+         <input id="boton" type="button" value="Verificar">
+      </form>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

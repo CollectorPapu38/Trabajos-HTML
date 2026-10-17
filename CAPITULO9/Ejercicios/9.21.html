@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.21</title>
+      <script>
+         var caras = 0;
+         var cruces = 0;
+
+         function arrojar()
+         {
+            return Math.random() < 0.5; // false para cruz, true para cara
+         }
+
+         function lanzarMoneda()
+         {
+            var resultado = arrojar();
+            if ( resultado )
+            {
+               caras++;
+               document.getElementById( "resultado" ).innerHTML = "Resultado: <strong>Cara</strong>";
+            }
+            else
+            {
+               cruces++;
+               document.getElementById( "resultado" ).innerHTML = "Resultado: <strong>Cruz</strong>";
+            }
+
+            document.getElementById( "estadisticas" ).innerHTML = "Caras: " + caras + " | Cruces: " + cruces;
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnLanzar" ).addEventListener( "click", lanzarMoneda, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Simulador de Lanzamiento de Monedas</h3>
+      <form action="#">
+         <input id="btnLanzar" type="button" value="Lanzar">
+      </form>
+      <p id="resultado"></p>
+      <p id="estadisticas"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

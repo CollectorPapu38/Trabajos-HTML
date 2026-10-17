@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.26</title>
+      <script>
+         var numeroSecreto = Math.floor( Math.random() * 1000 ) + 1;
+         var intentos = 0;
+
+         function adivinar()
+         {
+            var intento = parseInt( document.getElementById( "intentoInput" ).value );
+            var mensajeP = document.getElementById( "mensaje" );
+
+            if ( isNaN( intento ) ) return;
+
+            intentos++;
+
+            if ( intento < numeroSecreto )
+            {
+               mensajeP.innerHTML = "Demasiado bajo. Intente de nuevo.";
+               document.getElementById( "intentoInput" ).value = "";
+            }
+            else if ( intento > numeroSecreto )
+            {
+               mensajeP.innerHTML = "Demasiado alto. Intente de nuevo.";
+               document.getElementById( "intentoInput" ).value = "";
+            }
+            else
+            {
+               var textoExtra = "";
+               if ( intentos < 10 ) textoExtra = " ¡Conoce el secreto o tuvo suerte!";
+               else if ( intentos === 10 ) textoExtra = " ¡Entonces sí conoce el secreto!";
+               else textoExtra = " ¡Debería poder hacerlo mejor!";
+
+               mensajeP.innerHTML = "<strong>¡Felicidades. Adivinó el número en " + intentos + " intentos!</strong>" + textoExtra;
+               document.getElementById( "intentoInput" ).value = "";
+               numeroSecreto = Math.floor( Math.random() * 1000 ) + 1;
+               intentos = 0;
+            }
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnAdivinar" ).addEventListener( "click", adivinar, false );
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>Adivina el Número con Conteo de Intentos</h3>
+      <form action="#">
+         Adivine un número entre 1 y 1000: <input id="intentoInput" type="text">
+         <input id="btnAdivinar" type="button" value="Enviar Intento">
+      </form>
+      <p id="mensaje"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

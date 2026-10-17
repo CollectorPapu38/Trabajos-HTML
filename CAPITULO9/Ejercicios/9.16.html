@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.16</title>
+      <script>
+         function mostrarDigitos( numero )
+         {
+            if ( numero < 1 || numero > 99999 ) return "Número fuera de rango";
+            
+            var digitos = [];
+            var temp = numero;
+
+            while ( temp > 0 )
+            {
+               digitos.unshift( temp % 10 );
+               temp = Math.floor( temp / 10 );
+            }
+
+            return digitos.join( "  " );
+         }
+
+         function ejecutar()
+         {
+            var entrada = prompt( "Introduce un entero entre 1 y 99999:" );
+            var num = parseInt( entrada );
+            var res = mostrarDigitos( num );
+            document.getElementById( "resultado" ).innerHTML = "Resultado: <strong>" + res + "</strong>";
+         }
+
+         window.addEventListener( "load", ejecutar, false );
+      </script>
+   </head>
+   <body>
+      <h3>9.16 Mostrar Dígitos separados por dos espacios</h3>
+      <p id="resultado"></p>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>

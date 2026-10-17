@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ejercicio 9.24</title>
+      <script>
+         var num1, num2, respuestaCorrecta;
+         var correctas = 0;
+         var incorrectas = 0;
+         var totalPreguntas = 0;
+
+         function generarPregunta()
+         {
+            if ( totalPreguntas >= 10 )
+            {
+               var porcentaje = ( correctas / 10 ) * 100;
+               var resultadoFinal = "Cuestionario finalizado.<br>Porcentaje de aciertos: " + porcentaje + "%<br>";
+               if ( porcentaje < 75 )
+               {
+                  resultadoFinal += "<strong>Pida ayuda adicional a su instructor.</strong>";
+               }
+               else
+               {
+                  resultadoFinal += "<strong>¡Excelente trabajo!</strong>";
+               }
+               document.getElementById( "contenedor" ).innerHTML = resultadoFinal;
+               return;
+            }
+
+            num1 = Math.floor( Math.random() * 9 ) + 1;
+            num2 = Math.floor( Math.random() * 9 ) + 1;
+            respuestaCorrecta = num1 * num2;
+            document.getElementById( "pregunta" ).innerHTML = "¿Cuánto es " + num1 + " por " + num2 + "? (Pregunta " + (totalPreguntas + 1) + " de 10)";
+            document.getElementById( "respuesta" ).value = "";
+            document.getElementById( "mensaje" ).innerHTML = "";
+         }
+
+         function verificarRespuesta()
+         {
+            if ( totalPreguntas >= 10 ) return;
+
+            var respuestaUsuario = parseInt( document.getElementById( "respuesta" ).value );
+            var mensajeP = document.getElementById( "mensaje" );
+
+            if ( respuestaUsuario === respuestaCorrecta )
+            {
+               correctas++;
+               totalPreguntas++;
+               mensajeP.innerHTML = "<strong>¡Correcto!</strong>";
+               setTimeout( generarPregunta, 1200 );
+            }
+            else
+            {
+               incorrectas++;
+               totalPreguntas++;
+               mensajeP.innerHTML = "<strong>Incorrecto.</strong>";
+               setTimeout( generarPregunta, 1200 );
+            }
+         }
+
+         function iniciar()
+         {
+            document.getElementById( "btnEnviar" ).addEventListener( "click", verificarRespuesta, false );
+            generarPregunta();
+         }
+
+         window.addEventListener( "load", iniciar, false );
+      </script>
+   </head>
+   <body>
+      <h3>CAI - Monitoreo de Rendimiento (10 preguntas)</h3>
+      <div id="contenedor">
+         <p id="pregunta"></p>
+         <form action="#">
+            <input id="respuesta" type="text">
+            <input id="btnEnviar" type="button" value="Enviar">
+         </form>
+         <p id="mensaje"></p>
+      </div>
+
+      <br>
+      <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+   </body>
+</html>
