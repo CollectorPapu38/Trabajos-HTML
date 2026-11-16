@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.04 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.04</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+    </style>
+    <script>
+        function mostrar( arreglo )
+        {
+            var texto = "<table>";
+            for ( var f = 0; f < arreglo.length; ++f )
+            {
+                texto += "<tr>";
+                for ( var c = 0; c < 3; ++c )
+                    texto += "<td>" + arreglo[ f ][ c ] + "</td>";
+                texto += "</tr>";
+            }
+            return texto + "</table>";
+        }
+
+        function iniciar()
+        {
+            var x, y;
+
+            // 1) como el libro: new Array( 3 ) y x + y
+            var tabla1 = new Array( new Array( 3 ), new Array( 3 ), new Array( 3 ) );
+            var totalElementos = tabla1.length * tabla1[ 0 ].length;
+            for ( x in tabla1 )
+                for ( y in tabla1[ x ] )
+                    tabla1[ x ][ y ] = x + y;
+
+            // 2) elementos que ya existen, pero x + y (concatena)
+            var tabla2 = [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ];
+            for ( x in tabla2 )
+                for ( y in tabla2[ x ] )
+                    tabla2[ x ][ y ] = x + y;
+
+            // 3) corregida
+            var tabla3 = [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ];
+            for ( x in tabla3 )
+                for ( y in tabla3[ x ] )
+                    tabla3[ x ][ y ] = parseInt( x ) + parseInt( y );
+
+            document.getElementById( "resultados" ).innerHTML =
+                "<p>b) totalElementos = " + totalElementos + "</p>" +
+                "<p><strong>1)</strong> Como el libro (new Array y x + y): el ciclo no se ejecuta</p>" + mostrar( tabla1 ) +
+                "<p><strong>2)</strong> Elementos existentes pero x + y: concatena</p>" + mostrar( tabla2 ) +
+                "<p><strong>3)</strong> Corregida</p>" + mostrar( tabla3 );
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.04</h1>
+    <h2>Instrucciones con el arreglo tabla</h2>
+
+    <ol type="a">
+        <li>Declarar y crear el arreglo con tres filas y tres columnas:
+            <pre><code>var tabla = new Array( new Array( 3 ), new Array( 3 ), new Array( 3 ) );</code></pre></li>
+        <li>Almacenar el número total de elementos en <code>totalElementos</code>:
+            <pre><code>var totalElementos = tabla.length * tabla[ 0 ].length;</code></pre></li>
+        <li>Usar <code>for...in</code> para inicializar cada elemento con la suma de sus índices (variables <code>x</code> y <code>y</code>).
+            Respuesta del libro:
+            <pre><code>for ( var x in tabla )
+{
+   for ( var y in table[ x ] )
+   {
+      tabla[ x ][ y ] = x + y;
+   }
+}</code></pre></li>
+    </ol>
+
+    <h3>La respuesta del libro tiene 3 errores</h3>
+    <ol>
+        <li><strong>Error de escritura:</strong> dice <code>table[ x ]</code> en lugar de <code>tabla[ x ]</code>.</li>
+        <li><strong>El ciclo interno no hace nada:</strong> <code>new Array( 3 )</code> crea 3 posiciones
+            <em>vacías</em> (sin elementos). Como dice el Tip 10.2, <code>for...in</code> <strong>omite los elementos
+            que no existen</strong>, así que el ciclo interno nunca se ejecuta y la tabla queda en <code>undefined</code>.
+            Para que funcione, los elementos deben existir primero, por ejemplo creando la tabla con una lista
+            inicializadora: <code>var tabla = [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ];</code></li>
+        <li><strong>Concatena en vez de sumar:</strong> en <code>for...in</code> las variables <code>x</code> y
+            <code>y</code> son <strong>cadenas</strong> ("0", "1", "2"), así que <code>x + y</code> une texto:
+            "1" + "2" da "12", no 3. Hay que convertirlas con <code>parseInt</code>.</li>
+    </ol>
+    <p><strong>Respuesta corregida:</strong></p>
+    <pre><code>var tabla = [ [ 0, 0, 0 ], [ 0, 0, 0 ], [ 0, 0, 0 ] ];   // los elementos ya existen
+
+for ( var x in tabla )
+{
+   for ( var y in tabla[ x ] )
+   {
+      tabla[ x ][ y ] = parseInt( x ) + parseInt( y );
+   }
+}</code></pre>
+
+    <h3>Comprobación de las tres versiones</h3>
+    <div id="resultados"></div>
+
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

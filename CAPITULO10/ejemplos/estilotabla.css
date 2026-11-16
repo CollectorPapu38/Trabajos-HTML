@@ -1,0 +1,6 @@
+/* estilotabla.css: estilos para las tablas de los ejemplos 10.01 y 10.02
+   (el libro no muestra este archivo; se recreó a partir de las capturas) */
+table { width: 15em; border-collapse: collapse; }
+th, td { border: 1px solid black; padding: 0.2em; text-align: left; }
+thead th { background-color: black; color: white; }
+tbody td { background-color: lightgrey; }

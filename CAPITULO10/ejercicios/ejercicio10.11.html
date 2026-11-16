@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.11 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.11</title>
+    <script>
+        function iniciar()
+        {
+            var i;
+            var cuentas = new Array( 10 );
+            for ( i = 0; i < cuentas.length; ++i )
+                cuentas[ i ] = 0;
+
+            var bono = [ 5, 4, 3, 2, 1, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 ];
+            for ( i = 0; i < bono.length; ++i )
+                ++bono[ i ];
+
+            var mejoresPuntuaciones = [ 980, 875, 850, 790, 760 ];
+
+            document.getElementById( "resultados" ).innerHTML =
+                "<p>a) cuentas = [ " + cuentas.join( ", " ) + " ]</p>" +
+                "<p>b) bono = [ " + bono.join( ", " ) + " ]</p>" +
+                "<p>c) " + mejoresPuntuaciones.join( " " ) + "</p>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.11</h1>
+    <h2>Operaciones con arreglos unidimensionales</h2>
+
+    <ol type="a">
+        <li>Establecer los 10 elementos del arreglo <code>cuentas</code> en ceros:
+            <pre><code>for ( var i = 0; i &lt; cuentas.length; ++i )
+   cuentas[ i ] = 0;</code></pre></li>
+        <li>Sumar 1 a cada uno de los 15 elementos del arreglo <code>bono</code>:
+            <pre><code>for ( var i = 0; i &lt; bono.length; ++i )
+   ++bono[ i ];</code></pre></li>
+        <li>Mostrar los cinco valores de <code>mejoresPuntuaciones</code> separados por espacios:
+            <pre><code>document.writeln( mejoresPuntuaciones.join( " " ) );</code></pre></li>
+    </ol>
+
+    <h3>Comprobación</h3>
+    <div id="resultados"></div>
+
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.08 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.08</title>
+    <script>
+        function iniciar()
+        {
+            var salida = "";
+            var i;
+
+            // a)
+            var f = [ 10, 20, 30, 40, 50, 60, 70, 80 ];
+            salida += "<p>a) s&eacute;ptimo elemento de f: " + f[ 6 ] + "</p>";
+
+            // b)
+            var g = new Array( 5 );
+            for ( i = 0; i < g.length; ++i )
+                g[ i ] = 8;
+            salida += "<p>b) g = [ " + g.join( ", " ) + " ]</p>";
+
+            // c) c contiene 1, 2, ..., 100
+            var c = new Array( 100 );
+            for ( i = 0; i < c.length; ++i )
+                c[ i ] = i + 1;
+            var total = 0;
+            for ( i = 0; i < c.length; ++i )
+                total += c[ i ];
+            salida += "<p>c) total de c (1 a 100): " + total + "</p>";
+
+            // d)
+            var a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ];
+            var b = new Array( 34 );
+            for ( i = 0; i < a.length; ++i )
+                b[ i ] = a[ i ];
+            var inicioB = [];
+            for ( i = 0; i < 12; ++i )
+                inicioB[ i ] = b[ i ];
+            salida += "<p>d) primeros 12 elementos de b: " + inicioB.join( ", " ) + " (el 12&deg; sigue undefined)</p>";
+
+            // e) w con 99 valores aleatorios entre -50 y 50
+            var w = new Array( 99 );
+            for ( i = 0; i < w.length; ++i )
+                w[ i ] = parseFloat( ( Math.random() * 100 - 50 ).toFixed( 2 ) );
+            var menor = w[ 0 ], mayor = w[ 0 ];
+            for ( i = 1; i < w.length; ++i )
+            {
+                if ( w[ i ] < menor ) menor = w[ i ];
+                if ( w[ i ] > mayor ) mayor = w[ i ];
+            }
+            salida += "<p>e) en 99 valores al azar: menor = " + menor + ", mayor = " + mayor + "</p>";
+
+            document.getElementById( "resultados" ).innerHTML = salida;
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.08</h1>
+    <h2>Escriba instrucciones para cada tarea</h2>
+
+    <ol type="a">
+        <li>Mostrar el valor del séptimo elemento del arreglo <code>f</code> (el séptimo tiene índice 6):
+            <pre><code>document.writeln( f[ 6 ] );</code></pre></li>
+        <li>Inicializar cada uno de los cinco elementos del arreglo <code>g</code> en 8:
+            <pre><code>for ( var i = 0; i &lt; g.length; ++i )
+   g[ i ] = 8;</code></pre></li>
+        <li>Calcular el total de los 100 elementos del arreglo <code>c</code>:
+            <pre><code>var total = 0;
+for ( var i = 0; i &lt; c.length; ++i )
+   total += c[ i ];</code></pre></li>
+        <li>Copiar el arreglo <code>a</code> de 11 elementos en la primera porción del arreglo <code>b</code> (34 elementos):
+            <pre><code>for ( var i = 0; i &lt; a.length; ++i )
+   b[ i ] = a[ i ];</code></pre></li>
+        <li>Determinar e imprimir el valor más pequeño y el más grande del arreglo <code>w</code> de 99 elementos:
+            <pre><code>var menor = w[ 0 ], mayor = w[ 0 ];
+for ( var i = 1; i &lt; w.length; ++i )
+{
+   if ( w[ i ] &lt; menor ) menor = w[ i ];
+   if ( w[ i ] &gt; mayor ) mayor = w[ i ];
+}
+document.writeln( "Menor: " + menor + ", mayor: " + mayor );</code></pre></li>
+    </ol>
+
+    <h3>Comprobación con datos de prueba</h3>
+    <div id="resultados"></div>
+
+    <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

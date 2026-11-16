@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.10 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.10</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+    </style>
+    <script>
+        var contadores = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];   // uno por rango
+        var rangos = [ "$200-299", "$300-399", "$400-499", "$500-599", "$600-699",
+                       "$700-799", "$800-899", "$900-999", "$1000 y m&aacute;s" ];
+
+        function iniciar()
+        {
+            document.getElementById( "botonAgregar" ).addEventListener( "click", agregar, false );
+            mostrarTabla();
+        }
+
+        function agregar()
+        {
+            var campo = document.getElementById( "campoVentas" );
+            var ventas = parseFloat( campo.value );
+
+            if ( isNaN( ventas ) || ventas < 0 )
+            {
+                window.alert( "Escriba un monto de ventas v\u00e1lido" );
+                return;
+            }
+
+            var salario = Math.floor( 200 + 0.09 * ventas );   // truncado a entero
+            var indice = Math.floor( salario / 100 ) - 2;
+            if ( indice > 8 )
+                indice = 8;
+
+            ++contadores[ indice ];
+            document.getElementById( "ultimo" ).innerHTML =
+                "Ventas $" + ventas + " &rarr; salario $" + salario + " (rango " + rangos[ indice ] + ")";
+            campo.value = "";
+            mostrarTabla();
+        }
+
+        function mostrarTabla()
+        {
+            var texto = "<table><thead><tr><th>Rango</th><th>Vendedores</th></tr></thead><tbody>";
+            for ( var i = 0; i < contadores.length; ++i )
+                texto += "<tr><td>" + rangos[ i ] + "</td><td>" + contadores[ i ] + "</td></tr>";
+            document.getElementById( "tabla" ).innerHTML = texto + "</tbody></table>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.10</h1>
+    <h2>Salarios por comisión: contar vendedores por rango</h2>
+
+    <p>Salario = <strong>$200 + 9% de las ventas brutas</strong>, truncado a entero. El arreglo de contadores tiene 9
+    elementos, uno por rango. El índice se calcula sin <code>if</code> ni <code>switch</code>:</p>
+    <pre><code>indice = Math.floor( salario / 100 ) - 2;   // $200-299 → 0, $300-399 → 1 ...
+if ( indice &gt; 8 ) indice = 8;               // $1000 y más → 8</code></pre>
+    <form action = "#">
+        <p><label>Ventas brutas del empleado: $<input id = "campoVentas" type = "number" min = "0" step = "any"></label>
+           <input id = "botonAgregar" type = "button" value = "Agregar"></p>
+    </form>
+    <p id = "ultimo"></p>
+    <div id = "tabla"></div>
+    <p><strong>Prueba:</strong> $5000 da salario $650 (rango $600-699); $0 da $200; $10000 da $1100 (rango $1000 y más).</p>
+
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* estilo.css: estilos compartidos por los ejemplos del capítulo 10
+   (el libro no muestra este archivo; se recreó a partir de las capturas) */
+p { margin: 0.3em 0; }
+
+/* tabla de frecuencias (ejemplo 10.04) */
+img { margin-right: 10px; }
+table { width: 15em; border-collapse: collapse; margin-top: 1em; }
+th, td { border: 1px solid black; padding: 0.2em 0.5em; text-align: left; }
+thead th { background-color: black; color: white; }
+tbody td { background-color: lightgrey; }
+
+/* arreglos multidimensionales (ejemplo 10.09): cada fila en una línea */
+ol { margin: 0.2em 0; }
+li { display: inline; margin-right: 10px; }

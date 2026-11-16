@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.14 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.14</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+    </style>
+    <script>
+        function iniciar()
+        {
+            document.getElementById( "botonTirar" ).addEventListener( "click", tirar, false );
+            tirar();
+        }
+
+        function tirar()
+        {
+            var combinaciones = [];
+            var d1, d2, i;
+
+            // crear 7 filas de 7 columnas en cero
+            for ( i = 0; i <= 6; ++i )
+                combinaciones[ i ] = [ 0, 0, 0, 0, 0, 0, 0 ];
+
+            for ( i = 1; i <= 36000; ++i )
+            {
+                d1 = Math.floor( 1 + Math.random() * 6 );
+                d2 = Math.floor( 1 + Math.random() * 6 );
+                ++combinaciones[ d1 ][ d2 ];
+            }
+
+            // tabla 6 x 6 de combinaciones
+            var texto = "<h3>Veces que sali&oacute; cada combinaci&oacute;n (dado 1 = fila, dado 2 = columna)</h3>" +
+                "<table><thead><tr><th></th>";
+            for ( d2 = 1; d2 <= 6; ++d2 )
+                texto += "<th>" + d2 + "</th>";
+            texto += "</tr></thead><tbody>";
+            for ( d1 = 1; d1 <= 6; ++d1 )
+            {
+                texto += "<tr><th>" + d1 + "</th>";
+                for ( d2 = 1; d2 <= 6; ++d2 )
+                    texto += "<td>" + combinaciones[ d1 ][ d2 ] + "</td>";
+                texto += "</tr>";
+            }
+            texto += "</tbody></table>";
+
+            // sumas de 2 a 12
+            var sumas = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+            for ( d1 = 1; d1 <= 6; ++d1 )
+                for ( d2 = 1; d2 <= 6; ++d2 )
+                    sumas[ d1 + d2 ] += combinaciones[ d1 ][ d2 ];
+
+            texto += "<h3>Frecuencia de cada suma</h3><table><thead><tr><th>Suma</th><th>Veces</th>" +
+                "<th>Porcentaje</th><th>Esperado</th></tr></thead><tbody>";
+            for ( var s = 2; s <= 12; ++s )
+            {
+                var formas = 6 - Math.abs( 7 - s );     // 2→1, 3→2, ..., 7→6, ..., 12→1
+                texto += "<tr><td>" + s + "</td><td>" + sumas[ s ] + "</td><td>" +
+                    ( sumas[ s ] / 360 ).toFixed( 2 ) + "%</td><td>" +
+                    ( formas / 36 * 100 ).toFixed( 2 ) + "% (" + formas + "/36)</td></tr>";
+            }
+            texto += "</tbody></table>";
+
+            document.getElementById( "resultados" ).innerHTML = texto;
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.14</h1>
+    <h2>Tirar dos dados 36,000 veces con un arreglo bidimensional</h2>
+
+    <p>Se usa un arreglo de 7 × 7 llamado <code>combinaciones</code>: <code>combinaciones[ d1 ][ d2 ]</code> cuenta
+    cuántas veces salió el dado 1 con valor <code>d1</code> y el dado 2 con valor <code>d2</code>, igual que la cuadrícula
+    de la figura 10.22. Los índices 0 no se usan. Después se suman las celdas para obtener cada suma de 2 a 12 y se
+    compara con lo esperado: el 7 tiene 6 combinaciones de 36, así que debe salir cerca de 1/6 de las veces.</p>
+    <form action = "#">
+        <p><input id = "botonTirar" type = "button" value = "Tirar 36,000 veces"></p>
+    </form>
+    <div id = "resultados"></div>
+
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.13 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.13</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+    </style>
+    <script>
+        function iniciar()
+        {
+            var ventas = [ new Array( 5 ), new Array( 5 ), new Array( 5 ) ];
+            for ( var f = 0; f < 3; ++f )
+                for ( var c = 0; c < 5; ++c )
+                    ventas[ f ][ c ] = 99;      // un valor cualquiera para que existan los elementos
+
+            var orden = [ [], [], [] ];
+            var paso = 0;
+
+            for ( var fila in ventas )
+            {
+                for ( var col in ventas[ fila ] )
+                {
+                    ventas[ fila ][ col ] = 0;
+                    orden[ fila ][ col ] = ++paso;   // registrar en qué paso se puso en cero
+                }
+            }
+
+            var texto = "<table><thead><tr><th></th>";
+            for ( c = 0; c < 5; ++c )
+                texto += "<th>col " + c + "</th>";
+            texto += "</tr></thead><tbody>";
+            for ( f = 0; f < 3; ++f )
+            {
+                texto += "<tr><th>fila " + f + "</th>";
+                for ( c = 0; c < 5; ++c )
+                    texto += "<td>" + orden[ f ][ c ] + "<br><small>ventas[" + f + "][" + c + "]</small></td>";
+                texto += "</tr>";
+            }
+            document.getElementById( "resultados" ).innerHTML = texto + "</tbody></table>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.13</h1>
+    <h2>Orden en que se ponen en cero los elementos de ventas (3 × 5)</h2>
+
+    <pre><code>for ( var fila in ventas )
+{
+   for ( var col in ventas[ fila ] )
+   {
+      ventas[ fila ][ col ] = 0;
+   }
+}</code></pre>
+    <p>El <code>for</code> externo recorre las filas y, por cada fila, el interno recorre <strong>todas</strong> sus
+    columnas. El orden es fila por fila, de izquierda a derecha. El número en cada celda indica en qué paso se pone en
+    cero (la tabla la genera el propio ciclo):</p>
+    <div id="resultados"></div>
+
+       <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

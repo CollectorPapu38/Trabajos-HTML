@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.12 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.12</title>
+    <script>
+        var unicos = [];       // como máximo tendrá 10 elementos
+        var leidos = 0;        // cuántos números se han introducido
+
+        function iniciar()
+        {
+            document.getElementById( "botonAgregar" ).addEventListener( "click", agregar, false );
+        }
+
+        function agregar()
+        {
+            var campo = document.getElementById( "campoNumero" );
+            var numero = parseInt( campo.value );
+            var mensaje = document.getElementById( "mensaje" );
+
+            if ( leidos == 10 )
+            {
+                mensaje.innerHTML = "Ya se introdujeron los 10 n&uacute;meros.";
+                return;
+            }
+            if ( isNaN( numero ) || numero < 10 || numero > 100 )
+            {
+                mensaje.innerHTML = "El n&uacute;mero debe estar entre 10 y 100.";
+                return;
+            }
+
+            ++leidos;
+            if ( unicos.indexOf( numero ) == -1 )
+            {
+                unicos[ unicos.length ] = numero;   // se agrega al final
+                mensaje.innerHTML = "N&uacute;mero " + leidos + " de 10: " + numero + " (nuevo)";
+            }
+            else
+                mensaje.innerHTML = "N&uacute;mero " + leidos + " de 10: " + numero + " es duplicado, no se imprime";
+
+            document.getElementById( "unicos" ).innerHTML =
+                "<strong>N&uacute;meros sin duplicados:</strong> " + unicos.join( " " );
+            campo.value = "";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.12</h1>
+    <h2>Eliminar duplicados: 10 números entre 10 y 100</h2>
+
+    <p>El "peor caso" es que los 10 números sean diferentes, así que el arreglo más pequeño posible tiene
+    <strong>10 elementos</strong>: sólo se guardan los números que no se han visto. Antes de guardar uno nuevo se busca
+    con <code>indexOf</code> (sección 10.9).</p>
+    <form action = "#">
+        <p><label>N&uacute;mero (10 a 100): <input id = "campoNumero" type = "number" min = "10" max = "100"></label>
+           <input id = "botonAgregar" type = "button" value = "Agregar"></p>
+    </form>
+    <p id = "mensaje"></p>
+    <p id = "unicos"></p>
+    <p><strong>Prueba:</strong> 15, 20, 15, 99, 20, 10, 100, 50, 15, 10 da como únicos 15, 20, 99, 10, 100, 50.</p>
+
+       <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

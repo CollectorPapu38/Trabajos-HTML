@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.17 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.17</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+
+        pre { font-family: monospace; font-size: 13px; }
+    </style>
+    <script>
+        function iniciar()
+        {
+            document.getElementById( "botonCarrera" ).addEventListener( "click", carrera, false );
+            carrera();
+        }
+
+        function moverTortuga( posicion )
+        {
+            var i = Math.floor( 1 + Math.random() * 10 );
+            if ( i <= 5 )
+                posicion += 3;          // paso pesado rápido
+            else if ( i <= 7 )
+                posicion -= 6;          // resbalón
+            else
+                posicion += 1;          // paso pesado lento
+            return Math.max( posicion, 1 );   // no puede quedar antes de la posición 1
+        }
+
+        function moverLiebre( posicion )
+        {
+            var i = Math.floor( 1 + Math.random() * 10 );
+            if ( i <= 2 )
+                ;                       // dormir: no se mueve
+            else if ( i <= 4 )
+                posicion += 9;          // gran salto
+            else if ( i == 5 )
+                posicion -= 12;         // gran resbalón
+            else if ( i <= 8 )
+                posicion += 1;          // pequeño salto
+            else
+                posicion -= 2;          // pequeño resbalón
+            return Math.max( posicion, 1 );
+        }
+
+        // arma una línea de 70 posiciones con la T, la H o el OUCH!!!
+        function linea( tortuga, liebre )
+        {
+            var pista = [];
+            for ( var p = 0; p < 70; ++p )
+                pista[ p ] = " ";
+
+            var t = Math.min( tortuga, 70 ) - 1;   // índice del arreglo (0 a 69)
+            var h = Math.min( liebre, 70 ) - 1;
+
+            if ( t == h )
+            {
+                var ouch = "OUCH!!!";
+                for ( var k = 0; k < ouch.length && t + k < 70; ++k )
+                    pista[ t + k ] = ouch.charAt( k );
+            }
+            else
+            {
+                pista[ t ] = "T";
+                pista[ h ] = "H";
+            }
+            return "|" + pista.join( "" ) + "|";
+        }
+
+        function carrera()
+        {
+            var tortuga = 1, liebre = 1, tic = 0;
+            var texto = "PUM!!!\nY ARRANCAN!!!\n\n";
+
+            while ( tortuga < 70 && liebre < 70 )
+            {
+                ++tic;
+                tortuga = moverTortuga( tortuga );
+                liebre = moverLiebre( liebre );
+                texto += ( tic < 10 ? " " : "" ) + tic + " " + linea( tortuga, liebre ) + "\n";
+            }
+
+            if ( tortuga >= 70 )      // si ambos llegan, gana la tortuga
+                texto += "\nLA TORTUGA GANA!!! YAY!!!";
+            else
+                texto += "\nLa liebre gana. Que mal.";
+
+            texto += "  (" + tic + " segundos)";
+            document.getElementById( "pista" ).innerHTML = texto;
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.17</h1>
+    <h2>Simulación: la tortuga y la liebre</h2>
+
+    <table>
+        <thead><tr><th>Animal</th><th>Movimiento</th><th>Tiempo</th><th>i (1 a 10)</th><th>Efecto</th></tr></thead>
+        <tbody>
+            <tr><td rowspan="3">Tortuga (T)</td><td>Paso pesado rápido</td><td>50%</td><td>1-5</td><td>+3</td></tr>
+            <tr><td>Resbalón</td><td>20%</td><td>6-7</td><td>-6</td></tr>
+            <tr><td>Paso pesado lento</td><td>30%</td><td>8-10</td><td>+1</td></tr>
+            <tr><td rowspan="5">Liebre (H)</td><td>Dormir</td><td>20%</td><td>1-2</td><td>0</td></tr>
+            <tr><td>Gran salto</td><td>20%</td><td>3-4</td><td>+9</td></tr>
+            <tr><td>Gran resbalón</td><td>10%</td><td>5</td><td>-12</td></tr>
+            <tr><td>Pequeño salto</td><td>30%</td><td>6-8</td><td>+1</td></tr>
+            <tr><td>Pequeño resbalón</td><td>20%</td><td>9-10</td><td>-2</td></tr>
+        </tbody>
+    </table>
+    <p>Cada repetición del ciclo es un tic del reloj. La pista se arma con un arreglo de 70 posiciones lleno de espacios;
+    se coloca la T y la H y se une con <code>join( "" )</code>. Si coinciden se escribe OUCH!!!. Si ambos llegan en el
+    mismo tic, se favorece a la tortuga, como sugiere el libro. Todos los tics se muestran de golpe porque los
+    temporizadores todavía no se ven en el libro.</p>
+    <form action = "#">
+        <p><input id = "botonCarrera" type = "button" value = "Nueva carrera"></p>
+    </form>
+    <pre id = "pista"></pre>
+
+       <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

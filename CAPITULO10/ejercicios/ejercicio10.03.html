@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.03 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.03</title>
+    <script>
+        function iniciar()
+        {
+            var fracciones = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];   // a)
+            fracciones[ 9 ] = 1.667;                               // d)
+            fracciones[ 0 ] = 3.333;                               // e)
+
+            var total = 0;                                         // f)
+            for ( var x in fracciones )
+            {
+                total += fracciones[ x ];
+            }
+
+            document.getElementById( "resultados" ).innerHTML =
+                "<p>fracciones = [ " + fracciones.join( ", " ) + " ]</p>" +
+                "<p>b) fracciones[ 3 ] = " + fracciones[ 3 ] + " &nbsp; c) fracciones[ 4 ] = " + fracciones[ 4 ] + "</p>" +
+                "<p>f) total = " + total + "</p>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.03</h1>
+    <h2>Instrucciones con el arreglo fracciones</h2>
+
+    <ol type="a">
+        <li>Declarar un arreglo con 10 elementos inicializados en 0:
+            <pre><code>var fracciones = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];</code></pre></li>
+        <li>Hacer referencia al elemento 3: <code>fracciones[ 3 ]</code></li>
+        <li>Hacer referencia al elemento 4: <code>fracciones[ 4 ]</code></li>
+        <li>Asignar 1.667 al elemento 9: <code>fracciones[ 9 ] = 1.667;</code></li>
+        <li>Asignar 3.333 al elemento de menor numeración: <code>fracciones[ 0 ] = 3.333;</code><br>
+            <strong>Ojo:</strong> la respuesta del libro dice <code>fracciones[ 6 ]</code>, pero el elemento de menor
+            numeración es el <strong>0</strong>.</li>
+        <li>Sumar todos los elementos con <code>for...in</code> y la variable <code>x</code>:
+            <pre><code>var total = 0;
+for ( var x in fracciones )
+{
+   total += fracciones[ x ];
+}</code></pre></li>
+    </ol>
+
+    <h3>Comprobación</h3>
+    <div id="resultados"></div>
+
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

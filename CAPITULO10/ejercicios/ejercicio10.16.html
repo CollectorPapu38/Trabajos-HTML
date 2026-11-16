@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.16 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.16</title>
+    <script>
+        function iniciar()
+        {
+            var esPrimo = new Array( 1000 );
+            var i, j;
+
+            // a) todos en true
+            for ( i = 0; i < esPrimo.length; ++i )
+                esPrimo[ i ] = true;
+
+            // b) 0 y 1 no son primos; tachar los múltiplos de cada primo
+            esPrimo[ 0 ] = false;
+            esPrimo[ 1 ] = false;
+            for ( i = 2; i * i < esPrimo.length; ++i )
+            {
+                if ( esPrimo[ i ] )
+                {
+                    for ( j = i * i; j < esPrimo.length; j += i )
+                        esPrimo[ j ] = false;
+                }
+            }
+
+            // imprimir los índices que siguen en true
+            var primos = [];
+            for ( i = 1; i < esPrimo.length; ++i )
+                if ( esPrimo[ i ] )
+                    primos[ primos.length ] = i;
+
+            document.getElementById( "resultados" ).innerHTML =
+                "<p><strong>" + primos.length + " primos entre 1 y 999:</strong></p><p>" + primos.join( " " ) + "</p>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.16</h1>
+    <h2>La criba de Eratóstenes</h2>
+
+    <p>Se usa un arreglo de 1000 elementos inicializados en <code>true</code>. Los elementos 0 y 1 se ponen en
+    <code>false</code>. Por cada índice que siga en <code>true</code>, se ponen en <code>false</code> todos sus múltiplos.
+    Al final, los índices que quedan en <code>true</code> son los primos.</p>
+    <p><strong>Optimización:</strong> basta empezar a tachar desde <code>i * i</code> y llegar hasta i ≤ √999, por la
+    misma razón que en el ejercicio 9.19.</p>
+    <div id = "resultados"></div>
+    <p><strong>Comprobación:</strong> entre 1 y 999 hay 168 números primos.</p>
+
+    <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

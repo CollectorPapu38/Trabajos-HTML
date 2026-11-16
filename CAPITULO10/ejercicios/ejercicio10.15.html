@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.15 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.15</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+
+        pre { font-family: monospace; line-height: 1.1; }
+    </style>
+    <script>
+        // programas de ejemplo: cada comando separado por un salto de línea (\n)
+        var nombresEjemplos = [ "cuadrado", "escalera", "letraT" ];
+        var programasEjemplos = [
+            "2\n5,12\n3\n5,12\n3\n5,12\n3\n5,12\n1\n6\n9",
+            "3\n5,1\n4\n2\n5,4\n3\n5,4\n4\n5,4\n3\n5,4\n4\n5,4\n3\n5,4\n4\n5,4\n1\n6\n9",
+            "5,3\n2\n5,14\n1\n4\n4\n5,7\n4\n2\n5,14\n1\n6\n9" ];
+
+        var piso;          // arreglo de 20 x 20
+        var fila, columna; // posición de la tortuga
+        var direccion;     // 0 derecha, 1 abajo, 2 izquierda, 3 arriba
+        var plumaAbajo;    // true o false
+        var salida;        // texto que se muestra
+
+        function iniciar()
+        {
+            document.getElementById( "botonCargar" ).addEventListener( "click", cargarEjemplo, false );
+            document.getElementById( "botonEjecutar" ).addEventListener( "click", ejecutar, false );
+            cargarEjemplo();
+            ejecutar();
+        }
+
+        function cargarEjemplo()
+        {
+            var nombre = document.getElementById( "ejemplos" ).value;
+            var indice = nombresEjemplos.indexOf( nombre );   // buscar el ejemplo (sección 10.9)
+            document.getElementById( "comandos" ).value = programasEjemplos[ indice ];
+        }
+
+        function reiniciar()
+        {
+            piso = [];
+            for ( var f = 0; f < 20; ++f )
+            {
+                piso[ f ] = [];
+                for ( var c = 0; c < 20; ++c )
+                    piso[ f ][ c ] = 0;
+            }
+            fila = 0;
+            columna = 0;
+            direccion = 0;
+            plumaAbajo = false;
+        }
+
+        // avanza la tortuga paso a paso; si la pluma está abajo marca un 1
+        function avanzar( pasos )
+        {
+            var df = [ 0, 1, 0, -1 ];   // cambio de fila según la dirección
+            var dc = [ 1, 0, -1, 0 ];   // cambio de columna según la dirección
+
+            if ( plumaAbajo )
+                piso[ fila ][ columna ] = 1;
+
+            for ( var i = 1; i <= pasos; ++i )
+            {
+                var nuevaFila = fila + df[ direccion ];
+                var nuevaColumna = columna + dc[ direccion ];
+
+                // la tortuga no puede salirse del piso
+                if ( nuevaFila < 0 || nuevaFila > 19 || nuevaColumna < 0 || nuevaColumna > 19 )
+                    break;
+
+                fila = nuevaFila;
+                columna = nuevaColumna;
+                if ( plumaAbajo )
+                    piso[ fila ][ columna ] = 1;
+            }
+        }
+
+        function imprimir()
+        {
+            var borde = "+";
+            for ( var b = 0; b < 20; ++b )
+                borde += "--";
+            borde += "+\n";
+
+            var texto = borde;
+            for ( var f = 0; f < 20; ++f )
+            {
+                texto += "|";
+                for ( var c = 0; c < 20; ++c )
+                    texto += ( piso[ f ][ c ] == 1 ? "* " : "  " );
+                texto += "|\n";
+            }
+            salida += texto + borde + "\n";
+        }
+
+        function ejecutar()
+        {
+            var lineas = document.getElementById( "comandos" ).value.split( "\n" );
+            reiniciar();
+            salida = "";
+
+            for ( var i = 0; i < lineas.length; ++i )
+            {
+                var partes = lineas[ i ].split( "," );
+                var comando = parseInt( partes[ 0 ] );
+
+                if ( comando == 9 )            // centinela
+                    break;
+
+                switch ( comando )
+                {
+                    case 1: plumaAbajo = false; break;
+                    case 2: plumaAbajo = true; break;
+                    case 3: direccion = ( direccion + 1 ) % 4; break;
+                    case 4: direccion = ( direccion + 3 ) % 4; break;   // +3 es lo mismo que -1 en % 4
+                    case 5: avanzar( partes.length > 1 ? parseInt( partes[ 1 ] ) : 10 ); break;
+                    case 6: imprimir(); break;
+                    case 7: reiniciar(); break;
+                }
+            }
+
+            if ( salida == "" )
+                salida = "(El programa no tiene el comando 6 para imprimir)";
+            document.getElementById( "salida" ).innerHTML = salida;
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.15</h1>
+    <h2>Gráficos de tortuga</h2>
+
+    <p>El piso es un arreglo de 20 × 20 inicializado en ceros. La tortuga empieza en (0, 0) con la pluma arriba y mirando
+    a la derecha. Las direcciones se guardan como un número: 0 derecha, 1 abajo, 2 izquierda y 3 arriba. Girar a la
+    derecha suma 1 y girar a la izquierda resta 1, siempre con <code>% 4</code>.</p>
+    <table>
+        <thead><tr><th>Comando</th><th>Significado</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>Pluma arriba</td></tr>
+            <tr><td>2</td><td>Pluma abajo</td></tr>
+            <tr><td>3</td><td>Girar a la derecha</td></tr>
+            <tr><td>4</td><td>Girar a la izquierda</td></tr>
+            <tr><td>5,10</td><td>Avanzar 10 espacios (o el número indicado)</td></tr>
+            <tr><td>6</td><td>Imprimir el arreglo de 20 por 20</td></tr>
+            <tr><td>7 <em>(agregado)</em></td><td>Borrar el piso y regresar a (0, 0)</td></tr>
+            <tr><td>9</td><td>Fin de datos (centinela)</td></tr>
+        </tbody>
+    </table>
+    <p>Escribe un comando por línea (o elige un programa de ejemplo) y presiona <strong>Ejecutar</strong>:</p>
+    <form action = "#">
+        <p><select id = "ejemplos">
+                <option value = "cuadrado">Cuadrado de 12 por 12 (el del libro)</option>
+                <option value = "escalera">Escalera</option>
+                <option value = "letraT">Letra T</option>
+           </select>
+           <input id = "botonCargar" type = "button" value = "Cargar ejemplo"></p>
+        <p><textarea id = "comandos" rows = "12" cols = "20"></textarea></p>
+        <p><input id = "botonEjecutar" type = "button" value = "Ejecutar"></p>
+    </form>
+    <pre id = "salida"></pre>
+
+    
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+    
+</body>
+</html>

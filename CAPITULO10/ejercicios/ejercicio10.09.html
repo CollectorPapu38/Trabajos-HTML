@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.09 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.09</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; text-align: center; }
+        thead th { background-color: black; color: white; }
+    </style>
+    <script>
+        function iniciar()
+        {
+            var t = [ new Array( 3 ), new Array( 3 ) ];                // a)
+            var fila, col;
+
+            for ( fila = 0; fila < t.length; ++fila )                  // i) primero en cero...
+                for ( col = 0; col < t[ fila ].length; ++col )
+                    t[ fila ][ col ] = 0;
+
+            for ( fila = 0; fila < t.length; ++fila )                  // ...y después valores de prueba
+                for ( col = 0; col < t[ fila ].length; ++col )
+                    t[ fila ][ col ] = Math.floor( Math.random() * 100 );
+
+            var menor = t[ 0 ][ 0 ];                                   // j)
+            for ( fila = 0; fila < t.length; ++fila )
+                for ( col = 0; col < t[ fila ].length; ++col )
+                    if ( t[ fila ][ col ] < menor )
+                        menor = t[ fila ][ col ];
+
+            // l) tabla con encabezados de índices
+            var tabla = "<table><thead><tr><th></th>";
+            for ( col = 0; col < 3; ++col )
+                tabla += "<th>" + col + "</th>";
+            tabla += "</tr></thead><tbody>";
+            for ( fila = 0; fila < t.length; ++fila )
+            {
+                tabla += "<tr><th>" + fila + "</th>";
+                for ( col = 0; col < t[ fila ].length; ++col )
+                    tabla += "<td>" + t[ fila ][ col ] + "</td>";
+                tabla += "</tr>";
+            }
+            tabla += "</tbody></table>";
+
+            document.getElementById( "resultados" ).innerHTML = tabla +
+                "<p>j) Valor m&aacute;s peque&ntilde;o: " + menor + "</p>" +
+                "<p>k) Primera fila: " + t[ 0 ].join( " " ) + "</p>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.09</h1>
+    <h2>Arreglo t de dos por tres</h2>
+
+    <ol type="a">
+        <li>Declarar y crear: <code>var t = [ new Array( 3 ), new Array( 3 ) ];</code></li>
+        <li>¿Cuántas filas? <strong>2</strong></li>
+        <li>¿Cuántas columnas? <strong>3</strong></li>
+        <li>¿Cuántos elementos? <strong>6</strong></li>
+        <li>Elementos de la fila 1: <code>t[1][0]</code>, <code>t[1][1]</code>, <code>t[1][2]</code></li>
+        <li>Elementos de la tercera columna (índice 2): <code>t[0][2]</code>, <code>t[1][2]</code></li>
+        <li>Fila 1, columna 2 en cero: <code>t[ 1 ][ 2 ] = 0;</code></li>
+        <li>Serie de instrucciones (sin ciclo):
+            <pre><code>t[0][0] = 0; t[0][1] = 0; t[0][2] = 0;
+t[1][0] = 0; t[1][1] = 0; t[1][2] = 0;</code></pre></li>
+        <li>Con <code>for</code> anidado:
+            <pre><code>for ( var fila = 0; fila &lt; t.length; ++fila )
+   for ( var col = 0; col &lt; t[ fila ].length; ++col )
+      t[ fila ][ col ] = 0;</code></pre></li>
+        <li>El valor más pequeño:
+            <pre><code>var menor = t[0][0];
+for ( var fila = 0; fila &lt; t.length; ++fila )
+   for ( var col = 0; col &lt; t[ fila ].length; ++col )
+      if ( t[ fila ][ col ] &lt; menor )
+         menor = t[ fila ][ col ];
+document.writeln( menor );</code></pre></li>
+        <li>Sin repetición, mostrar la primera fila: <code>document.writeln( t[ 0 ].join( " " ) );</code></li>
+        <li>Imprimir <code>t</code> en formato tabular con índices de columna arriba e índices de fila a la izquierda
+            (ver la ejecución).</li>
+    </ol>
+
+    <h3>Ejecución con valores aleatorios (0 a 99)</h3>
+    <div id="resultados"></div>
+
+      <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

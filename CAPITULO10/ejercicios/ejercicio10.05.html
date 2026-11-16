@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Ejercicio 10.05 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 10.05</title>
+    <script>
+        function iniciar()
+        {
+            var b = new Array( 10 );
+            var longitud = b.length;
+            for ( var i = 0; i <= longitud; ++i )
+                b[ i ] = 1;
+
+            var a1 = [ [ 1, 2 ], [ 3, 4 ] ];
+            a1[ 1, 1 ] = 5;                 // forma incorrecta
+            var a2 = [ [ 1, 2 ], [ 3, 4 ] ];
+            a2[ 1 ][ 1 ] = 5;               // forma correcta
+
+            document.getElementById( "resultados" ).innerHTML =
+                "<p>a) Con &lt;= el arreglo termin&oacute; con " + b.length + " elementos (deb&iacute;an ser 10).</p>" +
+                "<p>b) a[ 1, 1 ] = 5 deja la fila 1 como: " + a1[ 1 ] + "</p>" +
+                "<p>&nbsp;&nbsp;&nbsp;a[ 1 ][ 1 ] = 5 deja la fila 1 como: " + a2[ 1 ] + "</p>";
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 10.05</h1>
+    <h2>Encuentre el o los errores en cada segmento y corríjalos</h2>
+
+    <ol type="a">
+        <li>
+            <pre><code>var b = new Array( 10 );
+var longitud = b.length;
+
+for ( var i = 0; i &lt;= longitud; ++i )
+{
+   b[ i ] = 1;
+}</code></pre>
+            <strong>Error:</strong> con <code>&lt;=</code> el ciclo llega a <code>b[10]</code>, que está fuera de los
+            límites (los índices válidos son 0 a 9). Es un error <strong>lógico</strong>, no de sintaxis: JavaScript no
+            marca error, simplemente hace crecer el arreglo a 11 elementos.
+            <br><strong>Corrección:</strong> usar <code>i &lt; longitud</code>.
+        </li>
+        <li>
+            <pre><code>var a = [ [ 1, 2 ], [ 3, 4 ] ];
+a[ 1, 1 ] = 5;</code></pre>
+            <strong>Error:</strong> el indexado de arreglos bidimensionales se escribe incorrectamente. En JavaScript
+            <code>a[ 1, 1 ]</code> se evalúa con el operador coma y equivale a <code>a[ 1 ]</code>, por lo que
+            <strong>reemplaza toda la fila 1</strong> por el número 5.
+            <br><strong>Corrección:</strong> <code>a[ 1 ][ 1 ] = 5;</code>
+        </li>
+    </ol>
+
+    <h3>Comprobación</h3>
+    <div id="resultados"></div>
+
+   <p>
+          </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>
