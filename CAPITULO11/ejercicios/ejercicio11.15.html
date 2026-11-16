@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.15 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.15</title>
+    <script>
+        function cumple( cadena )
+        {
+            return cadena.charAt( 0 ) == "b";
+        }
+
+        function filtrar()
+        {
+            var cadenas = document.getElementById( "campoCadenas" ).value.split( " " );
+            var salida = "";
+
+            for ( var i = 0; i < cadenas.length; ++i )
+                if ( cadenas[ i ].length > 0 && cumple( cadenas[ i ] ) )
+                    salida += cadenas[ i ] + "\n";
+
+            document.getElementById( "salida" ).value = salida;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonFiltrar" ).addEventListener( "click", filtrar, false );
+            filtrar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.15</h1>
+    <h2>Cadenas que comienzan con "b"</h2>
+
+    <p>La condición es <code>cadena.charAt( 0 ) == "b"</code>. Si también quieres aceptar "B", usa
+    <code>cadena.charAt( 0 ).toLowerCase() == "b"</code>.</p>
+    <form action = "#">
+        <p><label>Cadenas separadas por espacios:<br>
+            <input id = "campoCadenas" type = "text" size = "60" value = "barco casa bola Burro perro bien arbol bueno"></label></p>
+        <p><input id = "botonFiltrar" type = "button" value = "Filtrar"></p>
+        <p><textarea id = "salida" rows = "8" cols = "40" readonly></textarea></p>
+    </form>
+
+    <p>
+        </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

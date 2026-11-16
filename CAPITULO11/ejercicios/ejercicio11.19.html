@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.19 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.19</title>
+    <script>
+        // devuelve la primera posición de subcadena en texto a partir de desde, o -1
+        function miIndexOf( texto, subcadena, desde )
+        {
+            for ( var i = desde; i <= texto.length - subcadena.length; ++i )
+            {
+                var coincide = true;
+                for ( var j = 0; j < subcadena.length; ++j )
+                {
+                    if ( texto.charAt( i + j ) != subcadena.charAt( j ) )
+                    {
+                        coincide = false;
+                        break;
+                    }
+                }
+                if ( coincide )
+                    return i;
+            }
+            return -1;
+        }
+
+        function buscar()
+        {
+            var texto = document.getElementById( "campoTexto" ).value;
+            var sub = document.getElementById( "campoBuscar" ).value;
+            var desde = parseInt( document.getElementById( "campoDesde" ).value );
+            if ( isNaN( desde ) || desde < 0 )
+                desde = 0;
+
+            document.getElementById( "resultado" ).innerHTML =
+                "miIndexOf: <strong>" + miIndexOf( texto, sub, desde ) + "</strong> &nbsp;|&nbsp; " +
+                "indexOf original: " + texto.indexOf( sub, desde );
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonBuscar" ).addEventListener( "click", buscar, false );
+            buscar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.19</h1>
+    <h2>Versión propia de indexOf</h2>
+
+    <p>Se prueba cada posición inicial <code>i</code> desde <code>desde</code> hasta
+    <code>texto.length - subcadena.length</code>. En cada una se comparan carácter por carácter con
+    <code>charAt</code>. Si todos coinciden, se devuelve <code>i</code>. Si ninguna posición sirve, se devuelve -1.</p>
+    <form action = "#">
+        <p><label>Texto: <input id = "campoTexto" type = "text" size = "45" value = "abcdefghijklmnopqrstuvwxyzabcdefghijklm"></label></p>
+        <p><label>Buscar: <input id = "campoBuscar" type = "text" value = "def"></label>
+           <label>Desde: <input id = "campoDesde" type = "number" value = "0" min = "0"></label>
+           <input id = "botonBuscar" type = "button" value = "Buscar"></p>
+    </form>
+    <p id = "resultado"></p>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.06 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.06</title>
+    <script>
+        function comparar()
+        {
+            var s1 = document.getElementById( "cadena1" ).value;
+            var s2 = document.getElementById( "cadena2" ).value;
+            var relacion;
+
+            if ( s1 < s2 )
+                relacion = "es <strong>menor</strong> que";
+            else if ( s1 == s2 )
+                relacion = "es <strong>igual</strong> a";
+            else
+                relacion = "es <strong>mayor</strong> que";
+
+            document.getElementById( "resultado" ).innerHTML =
+                "\"" + s1 + "\" " + relacion + " \"" + s2 + "\"";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonComparar" ).addEventListener( "click", comparar, false );
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.06</h1>
+    <h2>Comparar dos cadenas</h2>
+
+    <p>Las comparaciones usan el valor Unicode de cada carácter, de izquierda a derecha. Por eso las mayúsculas
+    (A = 65) van <strong>antes</strong> que las minúsculas (a = 97): <code>"Zorro" &lt; "abeja"</code> es
+    <code>true</code>.</p>
+    <form action = "#">
+        <p><label>Primera cadena: <input id = "cadena1" type = "text"></label></p>
+        <p><label>Segunda cadena: <input id = "cadena2" type = "text"></label></p>
+        <p><input id = "botonComparar" type = "button" value = "Comparar"></p>
+    </form>
+    <p id = "resultado"></p>
+    <p><strong>Prueba:</strong> "casa" y "cosa" da menor; "hola" y "hola" da igual; "b" y "a" da mayor; "Zorro" y
+    "abeja" da menor.</p>
+
+    <p>
+       </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

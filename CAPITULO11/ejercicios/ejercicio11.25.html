@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.25 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.25</title>
+    <script>
+        var unidades = [ "", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE" ];
+        var especiales = [ "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE",
+                           "DIECIOCHO", "DIECINUEVE", "VEINTE", "VEINTIUNO", "VEINTIDÓS", "VEINTITRÉS",
+                           "VEINTICUATRO", "VEINTICINCO", "VEINTISÉIS", "VEINTISIETE", "VEINTIOCHO", "VEINTINUEVE" ];
+        var decenas = [ "", "", "", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA" ];
+        var centenas = [ "", "CIENTO", "DOSCIENTOS", "TRESCIENTOS", "CUATROCIENTOS", "QUINIENTOS", "SEISCIENTOS",
+                         "SETECIENTOS", "OCHOCIENTOS", "NOVECIENTOS" ];
+
+        // convierte un número de 0 a 999 a palabras
+        function grupo( n )
+        {
+            if ( n == 100 )
+                return "CIEN";
+
+            var c = Math.floor( n / 100 );
+            var resto = n % 100;
+            var texto = centenas[ c ];
+
+            if ( resto > 0 )
+            {
+                if ( texto != "" )
+                    texto += " ";
+                if ( resto < 10 )
+                    texto += unidades[ resto ];
+                else if ( resto < 30 )
+                    texto += especiales[ resto - 10 ];
+                else
+                {
+                    texto += decenas[ Math.floor( resto / 10 ) ];
+                    if ( resto % 10 > 0 )
+                        texto += " Y " + unidades[ resto % 10 ];
+                }
+            }
+            return texto;
+        }
+
+        function enLetras( entero )
+        {
+            if ( entero == 0 )
+                return "CERO";
+
+            var miles = Math.floor( entero / 1000 );
+            var resto = entero % 1000;
+            var texto = "";
+
+            if ( miles == 1 )
+                texto = "MIL";
+            else if ( miles > 1 )
+            {
+                var m = grupo( miles );
+                // "UNO" se apocopa a "UN" antes de MIL (veintiún mil, treinta y un mil)
+                if ( m.lastIndexOf( "VEINTIUNO" ) == m.length - 9 && m.length >= 9 )
+                    m = m.substring( 0, m.length - 9 ) + "VEINTIÚN";
+                else if ( m.lastIndexOf( "UNO" ) == m.length - 3 && m.length >= 3 )
+                    m = m.substring( 0, m.length - 3 ) + "UN";
+                texto = m + " MIL";
+            }
+
+            if ( resto > 0 )
+                texto += ( texto != "" ? " " : "" ) + grupo( resto );
+            return texto;
+        }
+
+        function convertir()
+        {
+            var monto = parseFloat( document.getElementById( "campoMonto" ).value );
+            var resultado = document.getElementById( "resultado" );
+
+            if ( isNaN( monto ) || monto < 0 || monto > 999999.99 )
+            {
+                resultado.innerHTML = "Escriba un monto entre 0 y 999,999.99";
+                return;
+            }
+
+            var partes = monto.toFixed( 2 ).split( "." );    // [ "112", "43" ]
+            resultado.innerHTML = enLetras( parseInt( partes[ 0 ] ) ) + " CON " + partes[ 1 ] + "/100";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonConvertir" ).addEventListener( "click", convertir, false );
+            convertir();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.25</h1>
+    <h2>Monto de un cheque en letras</h2>
+
+    <p>El número se separa en parte entera y centavos. La parte entera se divide en grupos de 3 dígitos (miles y
+    unidades), y cada grupo se convierte con arreglos de palabras: unidades, especiales del 10 al 29, decenas y
+    centenas. Hay que cuidar las reglas del español:</p>
+    <ul>
+        <li>"CIEN" si es exactamente 100, pero "CIENTO" si sigue algo (CIENTO DOCE).</li>
+        <li>Del 16 al 29 se escriben en una palabra (DIECISÉIS, VEINTITRÉS).</li>
+        <li>Para los miles se dice "MIL", no "UN MIL", y "UNO" se vuelve "UN" antes de MIL (VEINTIÚN MIL).</li>
+    </ul>
+    <form action = "#">
+        <p><label>Monto: $<input id = "campoMonto" type = "number" step = "0.01" min = "0" max = "999999.99" value = "112.43"></label>
+           <input id = "botonConvertir" type = "button" value = "Convertir"></p>
+    </form>
+    <p id = "resultado" style = "font-size: 1.3em; font-family: monospace"></p>
+    <p><strong>Prueba:</strong> 112.43 da CIENTO DOCE CON 43/100; 100 da CIEN CON 00/100; 1001.5 da MIL UNO CON 50/100;
+    21000 da VEINTIÚN MIL CON 00/100.</p>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

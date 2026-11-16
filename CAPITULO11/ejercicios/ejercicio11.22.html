@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.22 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.22</title>
+    <style>
+        table    { border-collapse: collapse; margin: 0.5em 0; }
+        th, td   { border: 1px solid black; padding: 0.2em 0.6em; }
+        thead th { background-color: black; color: white; }
+    </style>
+    <script>
+        var meses = [ "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+                      "agosto", "septiembre", "octubre", "noviembre", "diciembre" ];
+        var dias = [ "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado" ];
+
+        function dosDigitos( n )
+        {
+            return ( n < 10 ? "0" : "" ) + n;
+        }
+
+        function mostrar()
+        {
+            var partes = document.getElementById( "campoFecha" ).value.split( "-" );
+            if ( partes.length != 3 )
+                return;
+
+            var fecha = new Date( parseInt( partes[ 0 ] ), parseInt( partes[ 1 ] ) - 1, parseInt( partes[ 2 ] ) );
+            var d = fecha.getDate(), m = fecha.getMonth(), a = fecha.getFullYear();
+
+            var formatos = [
+                [ "DD/MM/AAAA", dosDigitos( d ) + "/" + dosDigitos( m + 1 ) + "/" + a ],
+                [ "MM/DD/AAAA (EUA)", dosDigitos( m + 1 ) + "/" + dosDigitos( d ) + "/" + a ],
+                [ "DD-MM-AA", dosDigitos( d ) + "-" + dosDigitos( m + 1 ) + "-" + ( "" + a ).substring( 2 ) ],
+                [ "AAAA-MM-DD (ISO)", a + "-" + dosDigitos( m + 1 ) + "-" + dosDigitos( d ) ],
+                [ "Fecha larga", dias[ fecha.getDay() ] + " " + d + " de " + meses[ m ] + " de " + a ],
+                [ "Mes en mayúsculas", meses[ m ].toUpperCase() + " " + d + ", " + a ],
+                [ "toString()", fecha.toString() ],
+                [ "toLocaleString()", fecha.toLocaleString() ],
+                [ "toUTCString()", fecha.toUTCString() ],
+                [ "valueOf()", fecha.valueOf() ]
+            ];
+
+            var html = "";
+            for ( var i = 0; i < formatos.length; ++i )
+                html += "<tr><td>" + formatos[ i ][ 0 ] + "</td><td>" + formatos[ i ][ 1 ] + "</td></tr>";
+            document.getElementById( "filas" ).innerHTML = html;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonFormatos" ).addEventListener( "click", mostrar, false );
+            mostrar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.22</h1>
+    <h2>Impresión de fechas en varios formatos</h2>
+
+    <p>El campo <code>type = "date"</code> entrega la fecha como texto "AAAA-MM-DD". <strong>Cuidado:</strong>
+    <code>new Date( "2026-10-22" )</code> la interpreta en hora UTC y, en México (UTC-6), aparece como el
+    <em>día anterior</em> a las 18:00. Por eso se separa con <code>split( "-" )</code> y se usa
+    <code>new Date( año, mes - 1, día )</code>. Recuerda que los meses van de 0 a 11 (Error común 11.1).</p>
+    <form action = "#">
+        <p><label>Fecha: <input id = "campoFecha" type = "date" value = "2026-10-22"></label>
+           <input id = "botonFormatos" type = "button" value = "Mostrar formatos"></p>
+    </form>
+    <table>
+        <thead><tr><th>Formato</th><th>Resultado</th></tr></thead>
+        <tbody id = "filas"></tbody>
+    </table>
+
+    <p>
+        </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

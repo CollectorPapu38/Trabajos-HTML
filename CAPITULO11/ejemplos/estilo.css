@@ -1,0 +1,6 @@
+/* estilo.css: estilos compartidos por los ejemplos 11.01 a 11.04
+   (el libro no los muestra; se recrearon a partir de las capturas) */
+p { margin: 0.2em 0; }
+.indent { margin-left: 2em; }
+section { margin-bottom: 1em; }
+.navegacion { margin-top: 1.5em; }

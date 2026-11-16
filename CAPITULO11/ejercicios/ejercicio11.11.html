@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.11 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.11</title>
+    <script>
+        function invertir()
+        {
+            var tokens = document.getElementById( "campoTexto" ).value.split( " " );
+            var invertidos = [];
+
+            for ( var i = tokens.length - 1; i >= 0; --i )
+                invertidos[ invertidos.length ] = tokens[ i ];
+
+            document.getElementById( "resultado" ).innerHTML =
+                "<strong>Orden inverso:</strong> " + invertidos.join( " " );
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonInvertir" ).addEventListener( "click", invertir, false );
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.11</h1>
+    <h2>Tokens en orden inverso</h2>
+
+    <p>Se divide la línea con <code>split( " " )</code> y el arreglo de tokens se recorre desde el último índice hasta
+    el 0.</p>
+    <form action = "#">
+        <p><label>L&iacute;nea de texto: <input id = "campoTexto" type = "text" size = "50"
+            value = "el perro corri&oacute; en el parque"></label>
+           <input id = "botonInvertir" type = "button" value = "Invertir"></p>
+    </form>
+    <p id = "resultado"></p>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

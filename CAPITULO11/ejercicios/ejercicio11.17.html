@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.17 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.17</title>
+    <script>
+        function mostrar()
+        {
+            var codigo = parseInt( document.getElementById( "campoCodigo" ).value );
+            document.getElementById( "resultado" ).innerHTML =
+                codigo + " &rarr; " + String.fromCharCode( codigo );
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonMostrar" ).addEventListener( "click", mostrar, false );
+            mostrar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.17</h1>
+    <h2>Código entero → carácter</h2>
+
+    <p><code>String.fromCharCode( codigo )</code> convierte un valor Unicode en el carácter correspondiente.</p>
+    <form action = "#">
+        <p><label>C&oacute;digo: <input id = "campoCodigo" type = "number" min = "0" value = "65"></label>
+           <input id = "botonMostrar" type = "button" value = "Mostrar"></p>
+    </form>
+    <p id = "resultado" style = "font-size: 2em"></p>
+    <p><strong>Prueba:</strong> 65 da A; 97 da a; 241 da ñ; 8364 da €.</p>
+
+    <p>
+     </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

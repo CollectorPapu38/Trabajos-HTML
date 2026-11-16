@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.08 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.08</title>
+    <style>
+        pre { font-size: 1.2em; }
+    </style>
+    <script>
+        // cada fila es un grupo de versos que riman
+        var rimaA = [
+            [ "Un gato que vivía en Toluca", "comió tanto que perdió la nuca",
+              "y aunque nadie lo educa", "se puso una peluca", "y ahora canta en una barca de Lucca" ],
+            [ "Un programador de Xalapa", "escribía código bajo una capa",
+              "con café y una tapa", "dibujó un gran mapa", "y su bug ya nunca se escapa" ],
+            [ "Una tortuga muy elegante", "quiso correr como un gigante",
+              "con un salto importante", "y un paso constante", "llegó a la meta en un instante" ]
+        ];
+        var rimaB = [
+            [ "corrió por la playa", "saltó una valla", "perdió la toalla", "se puso una malla" ],
+            [ "rompió un renglón", "comió un melón", "subió a un avión", "cantó una canción" ],
+            [ "y se fue a dormir", "sin dejar de reír", "con ganas de vivir", "sin nada que decir" ]
+        ];
+
+        // devuelve un verso de la fila que todavía no se haya usado
+        function versoNuevo( fila, usados )
+        {
+            var indice;
+            do {
+                indice = Math.floor( Math.random() * fila.length );
+            } while ( usados.indexOf( indice ) != -1 );
+            usados[ usados.length ] = indice;
+            return fila[ indice ];
+        }
+
+        function quintilla()
+        {
+            var filaA = rimaA[ Math.floor( Math.random() * rimaA.length ) ];
+            var filaB = rimaB[ Math.floor( Math.random() * rimaB.length ) ];
+            var usadosA = [], usadosB = [];
+
+            var lineas = [ versoNuevo( filaA, usadosA ), versoNuevo( filaA, usadosA ),
+                           versoNuevo( filaB, usadosB ), versoNuevo( filaB, usadosB ),
+                           versoNuevo( filaA, usadosA ) ];
+
+            document.getElementById( "quintilla" ).innerHTML =
+                lineas[ 0 ] + ",\n" + lineas[ 1 ] + ";\n   " + lineas[ 2 ] + ",\n   " + lineas[ 3 ] + ",\n" + lineas[ 4 ] + ".";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonQuintilla" ).addEventListener( "click", quintilla, false );
+            quintilla();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.08</h1>
+    <h2>Quintillas al azar</h2>
+
+    <p>En una quintilla las líneas 1, 2 y 5 riman entre sí, y las líneas 3 y 4 riman entre ellas. Para garantizarlo se
+    usan <strong>grupos de rima</strong>: un arreglo bidimensional en el que cada fila contiene versos con la misma
+    terminación. Se elige una fila al azar para la rima A (líneas 1, 2 y 5) y otra para la rima B (líneas 3 y 4).
+    Después se toman versos distintos de esa fila con una función que evita repetirlos.</p>
+    <form action = "#"><p><input id = "botonQuintilla" type = "button" value = "Nueva quintilla"></p></form>
+    <pre id = "quintilla"></pre>
+
+    <p>
+       </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.09 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.09</title>
+    <script>
+        var resultado;   // frase traducida que se va armando
+
+        // traduce una palabra y la agrega al resultado
+        function imprimirPalabraEnLatin( palabra )
+        {
+            if ( palabra.length == 0 )
+                return;      // ignorar espacios dobles
+            resultado += palabra.substring( 1 ) + palabra.charAt( 0 ) + "ae ";
+        }
+
+        function convertir()
+        {
+            var frase = document.getElementById( "campoFrase" ).value.toLowerCase();
+            var tokens = frase.split( " " );
+            resultado = "";
+
+            for ( var i = 0; i < tokens.length; ++i )
+                imprimirPalabraEnLatin( tokens[ i ] );
+
+            var areaTexto = document.getElementById( "salida" );
+            areaTexto.value += frase + "  →  " + resultado + "\n";
+            document.getElementById( "campoFrase" ).value = "";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonConvertir" ).addEventListener( "click", convertir, false );
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.09</h1>
+    <h2>Latín cerdo</h2>
+
+    <p>Algoritmo: se divide la frase en palabras con <code>split( " " )</code>. A cada palabra se le pasa la primera
+    letra al final y se agrega "ae": "salta" da "altasae", "el" da "leae" y "computadora" da "omputadoracae".
+    Cada palabra se procesa en la función <code>imprimirPalabraEnLatin</code>, y todas las frases se acumulan en el
+    <code>textarea</code>.</p>
+    <form action = "#">
+        <p><label>Frase: <input id = "campoFrase" type = "text" size = "50"></label>
+           <input id = "botonConvertir" type = "button" value = "Convertir"></p>
+    </form>
+    <textarea id = "salida" rows = "10" cols = "70" readonly></textarea>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

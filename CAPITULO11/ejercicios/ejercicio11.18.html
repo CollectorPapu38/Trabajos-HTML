@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.18 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.18</title>
+    <style>
+        textarea { font-family: monospace; }
+    </style>
+    <script>
+        function tresDigitos( n )
+        {
+            var texto = "" + n;
+            while ( texto.length < 3 )
+                texto = "0" + texto;
+            return texto;
+        }
+
+        function iniciar()
+        {
+            var salida = "";
+            for ( var codigo = 0; codigo <= 255; ++codigo )
+            {
+                var caracter;
+                if ( codigo < 32 || codigo == 127 || ( codigo >= 128 && codigo < 160 ) )
+                    caracter = "(control)";
+                else
+                    caracter = String.fromCharCode( codigo );
+
+                var celda = tresDigitos( codigo ) + " " + caracter;
+                while ( celda.length < 14 )
+                    celda += " ";
+                salida += celda;
+                if ( codigo % 5 == 4 )       // 5 columnas por línea
+                    salida += "\n";
+            }
+            document.getElementById( "salida" ).value = salida;
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.18</h1>
+    <h2>Todos los códigos de 000 a 255</h2>
+
+    <p>Del 0 al 31 y el 127 son <strong>caracteres de control</strong> (salto de línea, tabulador, etc.) y no se ven,
+    así que se marcan como "(control)". Los códigos se rellenan con ceros a la izquierda hasta 3 dígitos.</p>
+    <textarea id = "salida" rows = "30" cols = "70" readonly></textarea>
+
+    <p>
+        </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

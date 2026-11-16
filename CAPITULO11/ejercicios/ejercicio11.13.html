@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.13 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.13</title>
+    <script>
+        // cuenta cuántas veces aparece caracter en texto usando indexOf
+        function contarOcurrencias( texto, caracter )
+        {
+            var cuenta = 0;
+            var posicion = texto.indexOf( caracter );
+
+            while ( posicion != -1 )
+            {
+                ++cuenta;
+                posicion = texto.indexOf( caracter, posicion + 1 );
+            }
+            return cuenta;
+        }
+
+        function contar()
+        {
+            var texto = document.getElementById( "texto" ).value;
+            var caracter = document.getElementById( "campoCaracter" ).value;
+
+            if ( caracter.length != 1 )
+            {
+                document.getElementById( "resultado" ).innerHTML = "Escriba exactamente un car&aacute;cter.";
+                return;
+            }
+
+            document.getElementById( "resultado" ).innerHTML =
+                "El car&aacute;cter '" + caracter + "' aparece <strong>" + contarOcurrencias( texto, caracter ) +
+                "</strong> veces.";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonContar" ).addEventListener( "click", contar, false );
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.13</h1>
+    <h2>Contar las ocurrencias de un carácter con indexOf</h2>
+
+    <p>Se llama a <code>indexOf( caracter, desde )</code> varias veces. Cada vez que encuentra el carácter, se cuenta y
+    la siguiente búsqueda empieza en la posición siguiente. El ciclo termina cuando devuelve -1.</p>
+    <form action = "#">
+        <p><textarea id = "texto" rows = "6" cols = "60">Ser o no ser: ese es el dilema.
+Que es mas noble para el espiritu.</textarea></p>
+        <p><label>Car&aacute;cter a buscar: <input id = "campoCaracter" type = "text" size = "2" maxlength = "1" value = "e"></label>
+           <input id = "botonContar" type = "button" value = "Contar"></p>
+    </form>
+    <p id = "resultado"></p>
+
+    <p>
+        </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

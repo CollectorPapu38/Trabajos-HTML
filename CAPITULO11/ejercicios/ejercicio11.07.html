@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.07 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.07</title>
+    <script>
+        var articulo = [ "el", "un", "algún", "ningún" ];
+        var sustantivo = [ "niño", "niña", "perro", "ciudad", "auto" ];
+        var verbo = [ "manejó", "saltó", "corrió", "caminó", "omitió" ];
+        var preposicion = [ "a", "desde", "encima de", "debajo de", "sobre" ];
+
+        function elegir( arreglo )
+        {
+            return arreglo[ Math.floor( Math.random() * arreglo.length ) ];
+        }
+
+        function enunciado()
+        {
+            var texto = elegir( articulo ) + " " + elegir( sustantivo ) + " " + elegir( verbo ) + " " +
+                elegir( preposicion ) + " " + elegir( articulo ) + " " + elegir( sustantivo );
+            return texto.charAt( 0 ).toUpperCase() + texto.substring( 1 ) + ".";
+        }
+
+        function historia()
+        {
+            var texto = "Había una vez...\n";
+            for ( var i = 1; i <= 20; ++i )
+                texto += enunciado() + "\n";
+            document.getElementById( "historia" ).value = texto + "FIN";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonHistoria" ).addEventListener( "click", historia, false );
+            historia();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.07</h1>
+    <h2>Generador de enunciados al azar (historia de 20 enunciados)</h2>
+
+    <p>Se elige una palabra al azar de cada arreglo en el orden artículo, sustantivo, verbo, preposición, artículo y
+    sustantivo. La primera letra se pasa a mayúscula con <code>charAt( 0 ).toUpperCase()</code> más
+    <code>substring( 1 )</code>, y se agrega un punto al final.</p>
+    <p><strong>Nota:</strong> como en el libro, el resultado no siempre concuerda en género ("el niña"). Ese detalle
+    se puede mejorar después.</p>
+    <form action = "#"><p><input id = "botonHistoria" type = "button" value = "Nueva historia"></p></form>
+    <textarea id = "historia" rows = "24" cols = "70" readonly></textarea>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

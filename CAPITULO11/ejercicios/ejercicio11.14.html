@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.14 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.14</title>
+    <style>
+        textarea { font-family: monospace; }
+    </style>
+    <script>
+        var alfabeto = "abcdefghijklmnñopqrstuvwxyz";
+
+        function contarOcurrencias( texto, caracter )
+        {
+            var cuenta = 0;
+            var posicion = texto.indexOf( caracter );
+            while ( posicion != -1 )
+            {
+                ++cuenta;
+                posicion = texto.indexOf( caracter, posicion + 1 );
+            }
+            return cuenta;
+        }
+
+        function contar()
+        {
+            var texto = document.getElementById( "texto" ).value.toLowerCase();
+            var totales = [];
+            var i;
+
+            for ( i = 0; i < alfabeto.length; ++i )
+                totales[ i ] = contarOcurrencias( texto, alfabeto.charAt( i ) );
+
+            // dos columnas: letras a-m a la izquierda y n-z a la derecha
+            var salida = "Letra  Total     Letra  Total\n";
+            var mitad = Math.ceil( alfabeto.length / 2 );
+            for ( i = 0; i < mitad; ++i )
+            {
+                salida += "  " + alfabeto.charAt( i ) + "    " + rellenar( totales[ i ] );
+                if ( i + mitad < alfabeto.length )
+                    salida += "       " + alfabeto.charAt( i + mitad ) + "    " + rellenar( totales[ i + mitad ] );
+                salida += "\n";
+            }
+            document.getElementById( "salida" ).value = salida;
+        }
+
+        // número alineado a 4 caracteres
+        function rellenar( numero )
+        {
+            var texto = "" + numero;
+            while ( texto.length < 4 )
+                texto = " " + texto;
+            return texto;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonContar" ).addEventListener( "click", contar, false );
+            contar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.14</h1>
+    <h2>Contar cada letra del alfabeto</h2>
+
+    <p>Es la función del 11.13 aplicada a cada letra de <code>"abcdefghijklmnñopqrstuvwxyz"</code>. Para contar
+    mayúsculas y minúsculas como una sola, primero se pasa todo el texto a minúsculas. Los totales se guardan en un
+    arreglo (uno por letra) y se imprimen en formato tabular en el <code>textarea</code>.</p>
+    <form action = "#">
+        <p><textarea id = "texto" rows = "6" cols = "60">Ser o no ser: ese es el dilema.
+QUE ES MAS NOBLE PARA EL ESPIRITU.</textarea></p>
+        <p><input id = "botonContar" type = "button" value = "Contar letras"></p>
+        <p><textarea id = "salida" rows = "16" cols = "40" readonly></textarea></p>
+    </form>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

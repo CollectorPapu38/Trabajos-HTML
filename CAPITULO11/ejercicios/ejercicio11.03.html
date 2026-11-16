@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.03 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.03</title>
+    <style>
+        textarea { font-family: monospace; }
+    </style>
+    <script>
+        // agrega una línea con el argumento (como texto) y el resultado
+        function fila( texto, valor )
+        {
+            var col = texto;
+            while ( col.length < 28 )
+                col += " ";          // rellenar con espacios para alinear la columna
+            return col + valor + "\n";
+        }
+
+        function iniciar()
+        {
+            var t = "";
+            var valores = [ 7.2, 0, -5.6, 9.2, -9.8 ];
+            var i;
+
+            t += "== abs, ceil, floor, round ==\n";
+            for ( i = 0; i < valores.length; ++i )
+            {
+                var x = valores[ i ];
+                t += fila( "abs( " + x + " )", Math.abs( x ) );
+                t += fila( "ceil( " + x + " )", Math.ceil( x ) );
+                t += fila( "floor( " + x + " )", Math.floor( x ) );
+                t += fila( "round( " + x + " )", Math.round( x ) );
+            }
+
+            t += "\n== exp, log, sqrt ==\n";
+            var positivos = [ 1, 2, 9, 900, Math.E ];
+            for ( i = 0; i < positivos.length; ++i )
+            {
+                var p = positivos[ i ];
+                t += fila( "exp( " + p + " )", Math.exp( p ) );
+                t += fila( "log( " + p + " )", Math.log( p ) );
+                t += fila( "sqrt( " + p + " )", Math.sqrt( p ) );
+            }
+
+            t += "\n== sin, cos, tan (radianes) ==\n";
+            var angulos = [ 0, Math.PI / 6, Math.PI / 4, Math.PI / 2, Math.PI ];
+            var nombres = [ "0", "PI/6", "PI/4", "PI/2", "PI" ];
+            for ( i = 0; i < angulos.length; ++i )
+            {
+                t += fila( "sin( " + nombres[ i ] + " )", Math.sin( angulos[ i ] ) );
+                t += fila( "cos( " + nombres[ i ] + " )", Math.cos( angulos[ i ] ) );
+                t += fila( "tan( " + nombres[ i ] + " )", Math.tan( angulos[ i ] ) );
+            }
+
+            t += "\n== max, min, pow ==\n";
+            var pares = [ [ 2.3, 12.7 ], [ -2.3, -12.7 ], [ 2, 7 ], [ 9, 0.5 ] ];
+            for ( i = 0; i < pares.length; ++i )
+            {
+                var a = pares[ i ][ 0 ], b = pares[ i ][ 1 ];
+                t += fila( "max( " + a + ", " + b + " )", Math.max( a, b ) );
+                t += fila( "min( " + a + ", " + b + " )", Math.min( a, b ) );
+                t += fila( "pow( " + a + ", " + b + " )", Math.pow( a, b ) );
+            }
+
+            document.getElementById( "salida" ).value = t;
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.03</h1>
+    <h2>Tablas de valores de las funciones de Math</h2>
+
+    <p>Para cada método de la figura 11.1 se muestra una tabla con varios argumentos. Las funciones trigonométricas
+    reciben radianes, así que se prueban con 0, π/6, π/4, π/2 y π. Por eso a veces aparecen valores como
+    <code>6.123e-17</code> en lugar de 0: es un error de redondeo de la computadora.</p>
+    <textarea id = "salida" rows = "40" cols = "80" readonly></textarea>
+
+    <p>
+        </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

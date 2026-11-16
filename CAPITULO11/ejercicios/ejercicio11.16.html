@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.16 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.16</title>
+    <script>
+        function cumple( cadena )
+        {
+            return cadena.length >= 2 && cadena.substring( cadena.length - 2 ) == "ed";
+        }
+
+        function filtrar()
+        {
+            var cadenas = document.getElementById( "campoCadenas" ).value.split( " " );
+            var salida = "";
+
+            for ( var i = 0; i < cadenas.length; ++i )
+                if ( cadenas[ i ].length > 0 && cumple( cadenas[ i ] ) )
+                    salida += cadenas[ i ] + "\n";
+
+            document.getElementById( "salida" ).value = salida;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonFiltrar" ).addEventListener( "click", filtrar, false );
+            filtrar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.16</h1>
+    <h2>Cadenas que terminan con "ed"</h2>
+
+    <p>Se toman los 2 últimos caracteres con <code>substring( cadena.length - 2 )</code> y se comparan con "ed".
+    Otra forma es <code>cadena.lastIndexOf( "ed" ) == cadena.length - 2</code>, que da lo mismo cuando la cadena mide
+    al menos 2.</p>
+    <form action = "#">
+        <p><label>Cadenas separadas por espacios:<br>
+            <input id = "campoCadenas" type = "text" size = "60" value = "red pared jumped edad sed played ed casa"></label></p>
+        <p><input id = "botonFiltrar" type = "button" value = "Filtrar"></p>
+        <p><textarea id = "salida" rows = "8" cols = "40" readonly></textarea></p>
+    </form>
+
+    <p>
+     </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

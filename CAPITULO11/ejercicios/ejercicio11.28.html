@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.28 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.28</title>
+    <style>
+        .col { display: inline-block; vertical-align: top; margin-right: 2em; }
+        table.crucigrama { border-collapse: collapse; }
+        .crucigrama td { width: 26px; height: 26px; border: 1px solid #333; text-align: center;
+                         font-family: monospace; font-size: 16px; position: relative; padding: 0; }
+        .crucigrama td.negra { background-color: #333; }
+        .crucigrama sup { position: absolute; top: 1px; left: 2px; font-size: 9px; }
+    </style>
+    <script>
+        var TAM = 20;          // tamaño de la cuadrícula
+        var cuadricula;        // arreglo bidimensional de letras
+        var colocadas;         // [ palabra, pista, fila, columna, horizontal ]
+
+        function crearCuadricula()
+        {
+            cuadricula = [];
+            for ( var f = 0; f < TAM; ++f )
+            {
+                cuadricula[ f ] = [];
+                for ( var c = 0; c < TAM; ++c )
+                    cuadricula[ f ][ c ] = "";
+            }
+        }
+
+        function celda( f, c )
+        {
+            if ( f < 0 || c < 0 || f >= TAM || c >= TAM )
+                return "";
+            return cuadricula[ f ][ c ];
+        }
+
+        // ¿cabe la palabra empezando en (f, c) en la dirección dada?
+        function cabe( palabra, f, c, horizontal )
+        {
+            var df = horizontal ? 0 : 1, dc = horizontal ? 1 : 0;
+            var cruces = 0;
+
+            if ( f < 0 || c < 0 || f + df * ( palabra.length - 1 ) >= TAM || c + dc * ( palabra.length - 1 ) >= TAM )
+                return false;
+            // la celda antes del inicio y después del final deben estar vacías
+            if ( celda( f - df, c - dc ) != "" || celda( f + df * palabra.length, c + dc * palabra.length ) != "" )
+                return false;
+
+            for ( var i = 0; i < palabra.length; ++i )
+            {
+                var ff = f + df * i, cc = c + dc * i;
+                var actual = cuadricula[ ff ][ cc ];
+
+                if ( actual == palabra.charAt( i ) )
+                    ++cruces;                 // comparte esta letra con otra palabra
+                else if ( actual != "" )
+                    return false;             // choca con una letra diferente
+                else if ( celda( ff + dc, cc + df ) != "" || celda( ff - dc, cc - df ) != "" )
+                    return false;             // quedaría pegada de lado a otra palabra
+            }
+            return cruces > 0 || colocadas.length == 0;
+        }
+
+        function colocar( palabra, pista, f, c, horizontal )
+        {
+            for ( var i = 0; i < palabra.length; ++i )
+                cuadricula[ f + ( horizontal ? 0 : i ) ][ c + ( horizontal ? i : 0 ) ] = palabra.charAt( i );
+            colocadas[ colocadas.length ] = [ palabra, pista, f, c, horizontal ];
+        }
+
+        // busca un cruce con cualquier letra ya colocada
+        function intentarColocar( palabra, pista )
+        {
+            for ( var f = 0; f < TAM; ++f )
+                for ( var c = 0; c < TAM; ++c )
+                    for ( var i = 0; i < palabra.length; ++i )
+                        if ( cuadricula[ f ][ c ] == palabra.charAt( i ) )
+                        {
+                            if ( cabe( palabra, f - i, c, false ) ) { colocar( palabra, pista, f - i, c, false ); return true; }
+                            if ( cabe( palabra, f, c - i, true ) )  { colocar( palabra, pista, f, c - i, true );  return true; }
+                        }
+            return false;
+        }
+
+        function compararNumero( a, b )
+        {
+            return a[ 0 ] - b[ 0 ];
+        }
+
+        function compararLongitud( a, b )
+        {
+            return b[ 0 ].length - a[ 0 ].length;     // de la más larga a la más corta
+        }
+
+        function generar()
+        {
+            var lineas = document.getElementById( "entrada" ).value.split( "\n" );
+            var palabras = [];
+            for ( var i = 0; i < lineas.length; ++i )
+            {
+                var partes = lineas[ i ].split( ":" );
+                if ( partes[ 0 ].length > 1 )
+                    palabras[ palabras.length ] = [ partes[ 0 ].toUpperCase(), partes.length > 1 ? partes[ 1 ] : "" ];
+            }
+            palabras.sort( compararLongitud );
+
+            crearCuadricula();
+            colocadas = [];
+            var noCaben = [];
+
+            for ( i = 0; i < palabras.length; ++i )
+            {
+                var palabra = palabras[ i ][ 0 ];
+                if ( colocadas.length == 0 )
+                    colocar( palabra, palabras[ i ][ 1 ], Math.floor( TAM / 2 ), Math.floor( ( TAM - palabra.length ) / 2 ), true );
+                else if ( !intentarColocar( palabra, palabras[ i ][ 1 ] ) )
+                    noCaben[ noCaben.length ] = palabra;
+            }
+
+            mostrar( noCaben );
+        }
+
+        function mostrar( noCaben )
+        {
+            // recortar filas y columnas vacías
+            var minF = TAM, maxF = -1, minC = TAM, maxC = -1, f, c, i;
+            for ( f = 0; f < TAM; ++f )
+                for ( c = 0; c < TAM; ++c )
+                    if ( cuadricula[ f ][ c ] != "" )
+                    {
+                        minF = Math.min( minF, f ); maxF = Math.max( maxF, f );
+                        minC = Math.min( minC, c ); maxC = Math.max( maxC, c );
+                    }
+
+            // número de cada palabra en la celda donde empieza
+            var numeros = [];
+            for ( i = 0; i < colocadas.length; ++i )
+                numeros[ colocadas[ i ][ 2 ] * TAM + colocadas[ i ][ 3 ] ] = 0;
+            var n = 0;
+            for ( f = minF; f <= maxF; ++f )
+                for ( c = minC; c <= maxC; ++c )
+                    if ( numeros[ f * TAM + c ] == 0 )
+                        numeros[ f * TAM + c ] = ++n;
+
+            function tablaCrucigrama( conLetras )
+            {
+                var html = "<table class = 'crucigrama'>";
+                for ( f = minF; f <= maxF; ++f )
+                {
+                    html += "<tr>";
+                    for ( c = minC; c <= maxC; ++c )
+                    {
+                        if ( cuadricula[ f ][ c ] == "" )
+                            html += "<td class = 'negra'></td>";
+                        else
+                            html += "<td><sup>" + ( numeros[ f * TAM + c ] || "" ) + "</sup>" +
+                                ( conLetras ? cuadricula[ f ][ c ] : "" ) + "</td>";
+                    }
+                    html += "</tr>";
+                }
+                return html + "</table>";
+            }
+
+            // pistas: [ número, texto ] separadas por dirección y ordenadas por número
+            var pistasH = [], pistasV = [];
+            for ( i = 0; i < colocadas.length; ++i )
+            {
+                var pista = [ numeros[ colocadas[ i ][ 2 ] * TAM + colocadas[ i ][ 3 ] ],
+                              colocadas[ i ][ 1 ] + " (" + colocadas[ i ][ 0 ].length + ")" ];
+                if ( colocadas[ i ][ 4 ] )
+                    pistasH[ pistasH.length ] = pista;
+                else
+                    pistasV[ pistasV.length ] = pista;
+            }
+            pistasH.sort( compararNumero );
+            pistasV.sort( compararNumero );
+
+            var horizontales = "", verticales = "";
+            for ( i = 0; i < pistasH.length; ++i )
+                horizontales += "<li>" + pistasH[ i ][ 0 ] + ". " + pistasH[ i ][ 1 ] + "</li>";
+            for ( i = 0; i < pistasV.length; ++i )
+                verticales += "<li>" + pistasV[ i ][ 0 ] + ". " + pistasV[ i ][ 1 ] + "</li>";
+
+            document.getElementById( "salida" ).innerHTML =
+                "<div class = 'col'><h3>Crucigrama</h3>" + tablaCrucigrama( false ) + "</div>" +
+                "<div class = 'col'><h3>Soluci&oacute;n</h3>" + tablaCrucigrama( true ) + "</div>" +
+                "<div class = 'col'><h3>Horizontales</h3><ul>" + horizontales + "</ul>" +
+                "<h3>Verticales</h3><ul>" + verticales + "</ul>" +
+                ( noCaben.length > 0 ? "<p>No se pudieron colocar: " + noCaben.join( ", " ) + "</p>" : "" ) + "</div>";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonGenerar" ).addEventListener( "click", generar, false );
+            generar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.28</h1>
+    <h2>Proyecto: un generador de crucigramas (versión sencilla)</h2>
+
+    <p>Respuestas a las preguntas del libro:</p>
+    <ul>
+        <li><strong>¿Cómo representar la cuadrícula?</strong> Con un arreglo bidimensional (filas × columnas) de
+            caracteres. Una celda vacía guarda "" y una ocupada guarda su letra.</li>
+        <li><strong>¿Cómo guardar las palabras?</strong> En un arreglo de pares <code>[ palabra, pista ]</code>,
+            ordenado de la más larga a la más corta, porque las largas son más difíciles de acomodar.</li>
+    </ul>
+    <p><strong>Algoritmo:</strong> la primera palabra se coloca horizontal al centro. Cada palabra siguiente busca una
+    letra en común con alguna celda ya ocupada y prueba a cruzarla en la otra dirección. Se acepta si no choca con
+    letras distintas ni queda pegada a otra palabra. Las que no caben se reportan.</p>
+    <form action = "#">
+        <p><label>Una palabra por rengl&oacute;n, con el formato <code>palabra:pista</code><br>
+        <textarea id = "entrada" rows = "8" cols = "50">javascript:Lenguaje de este libro
+arreglo:Estructura con índices
+cadena:Objeto String
+objeto:Tiene atributos y comportamientos
+fecha:Se maneja con Date
+math:Objeto con sqrt y pow
+json:Notación de objetos</textarea></label></p>
+        <p><input id = "botonGenerar" type = "button" value = "Generar crucigrama"></p>
+    </form>
+    <div id = "salida"></div>
+
+    <p>
+        </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.24 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.24</title>
+    <style>
+        pre { font-size: 1.6em; }
+    </style>
+    <script>
+        // agrega comas de miles a la parte entera de un número con 2 decimales
+        function conComas( texto )
+        {
+            var partes = texto.split( "." );
+            var entero = partes[ 0 ];
+            var resultado = "";
+            var contador = 0;
+
+            for ( var i = entero.length - 1; i >= 0; --i )
+            {
+                resultado = entero.charAt( i ) + resultado;
+                ++contador;
+                if ( contador % 3 == 0 && i > 0 )
+                    resultado = "," + resultado;
+            }
+            return resultado + "." + partes[ 1 ];
+        }
+
+        function proteger()
+        {
+            var monto = parseFloat( document.getElementById( "campoMonto" ).value );
+            var cheque = document.getElementById( "cheque" );
+
+            if ( isNaN( monto ) || monto < 0 )
+            {
+                cheque.innerHTML = "Monto inv&aacute;lido";
+                return;
+            }
+
+            var texto = conComas( monto.toFixed( 2 ) );
+            if ( texto.length > 9 )
+            {
+                cheque.innerHTML = texto + "\nNo cabe en los 9 espacios del cheque.";
+                return;
+            }
+
+            while ( texto.length < 9 )
+                texto = "*" + texto;
+
+            cheque.innerHTML = texto + "\n---------\n123456789";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonProteger" ).addEventListener( "click", proteger, false );
+            proteger();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.24</h1>
+    <h2>Protección de cheques</h2>
+
+    <p>Hay 9 espacios. El monto se escribe con 2 decimales (<code>toFixed( 2 )</code>) y con comas de miles. Después
+    se agregan asteriscos <strong>al principio</strong> hasta completar 9 caracteres. Si el monto no cabe, se
+    rechaza.</p>
+    <form action = "#">
+        <p><label>Monto: $<input id = "campoMonto" type = "number" step = "0.01" min = "0" value = "99.87"></label>
+           <input id = "botonProteger" type = "button" value = "Proteger"></p>
+    </form>
+    <pre id = "cheque"></pre>
+    <p><strong>Prueba:</strong> 99.87 da ****99.87; 1230.6 da *1,230.60; 12345.67 da 12,345.67; 123456.78 no cabe.</p>
+
+    <p>
+      </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.26 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.26</title>
+    <script>
+        // tabla de unidades: nombre (en plural), tipo y cuántas unidades base vale 1 unidad
+        var unidades = [
+            [ "metros", "longitud", 1 ], [ "centimetros", "longitud", 0.01 ], [ "milimetros", "longitud", 0.001 ],
+            [ "kilometros", "longitud", 1000 ], [ "pulgadas", "longitud", 0.0254 ], [ "pies", "longitud", 0.3048 ],
+            [ "yardas", "longitud", 0.9144 ], [ "millas", "longitud", 1609.344 ],
+            [ "litros", "volumen", 1 ], [ "mililitros", "volumen", 0.001 ], [ "cuartos", "volumen", 0.946353 ],
+            [ "galones", "volumen", 3.785412 ],
+            [ "gramos", "masa", 1 ], [ "kilogramos", "masa", 1000 ], [ "libras", "masa", 453.59237 ],
+            [ "onzas", "masa", 28.349523 ]
+        ];
+
+        var conAcento = "áéíóú";
+        var sinAcento = "aeiou";
+
+        function limpiar( texto )
+        {
+            texto = texto.toLowerCase();
+            var limpio = "";
+            for ( var i = 0; i < texto.length; ++i )
+            {
+                var c = texto.charAt( i );
+                var p = conAcento.indexOf( c );
+                if ( p != -1 )
+                    limpio += sinAcento.charAt( p );
+                else if ( c != "¿" && c != "?" )
+                    limpio += c;
+            }
+            return limpio;
+        }
+
+        // busca una unidad aceptando singular (metro) o plural (metros); devuelve su fila o null
+        function buscarUnidad( palabra )
+        {
+            for ( var i = 0; i < unidades.length; ++i )
+            {
+                var plural = unidades[ i ][ 0 ];
+                if ( palabra == plural || palabra + "s" == plural || palabra == "pie" && plural == "pies" )
+                    return unidades[ i ];
+            }
+            return null;
+        }
+
+        function responder()
+        {
+            var palabras = limpiar( document.getElementById( "campoPregunta" ).value ).split( " " );
+            var respuesta = document.getElementById( "respuesta" );
+            var destino = null, origen = null, cantidad = NaN;
+
+            for ( var i = 0; i < palabras.length - 1; ++i )
+            {
+                if ( palabras[ i ] == "cuantos" || palabras[ i ] == "cuantas" )
+                    destino = buscarUnidad( palabras[ i + 1 ] );
+                if ( !isNaN( parseFloat( palabras[ i ] ) ) )
+                {
+                    cantidad = parseFloat( palabras[ i ] );
+                    origen = buscarUnidad( palabras[ i + 1 ] );
+                }
+            }
+
+            if ( destino == null || origen == null || isNaN( cantidad ) )
+            {
+                respuesta.innerHTML = "No entend&iacute; la pregunta. Use la forma: &iquest;Cu&aacute;ntos/as UNIDAD hay en N UNIDAD?";
+                return;
+            }
+            if ( destino[ 1 ] != origen[ 1 ] )
+            {
+                respuesta.innerHTML = "Conversi&oacute;n inv&aacute;lida: los " + destino[ 0 ] + " son unidades de " +
+                    destino[ 1 ] + " y los " + origen[ 0 ] + " son unidades de " + origen[ 1 ] + ".";
+                return;
+            }
+
+            var resultado = cantidad * origen[ 2 ] / destino[ 2 ];   // pasar a la unidad base y luego a la destino
+            respuesta.innerHTML = "<strong>" + cantidad + " " + origen[ 0 ] + " = " +
+                parseFloat( resultado.toFixed( 4 ) ) + " " + destino[ 0 ] + "</strong>";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonResponder" ).addEventListener( "click", responder, false );
+            responder();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.26</h1>
+    <h2>Programa de conversión métrica</h2>
+
+    <p>La pregunta se limpia: minúsculas, sin acentos y sin "¿" ni "?". Después se divide en palabras y se buscan el
+    <strong>número</strong>, la <strong>unidad de origen</strong> (la que va después del número) y la
+    <strong>unidad destino</strong> (la que va después de "cuantos" o "cuantas"). Cada unidad está en una tabla con
+    su tipo (longitud, volumen o masa) y su factor respecto a la unidad base (metro, litro o gramo). Si los tipos no
+    coinciden, la conversión es inválida.</p>
+    <form action = "#">
+        <p><input id = "campoPregunta" type = "text" size = "50" value = "¿Cuántas pulgadas hay en 2 metros?">
+           <input id = "botonResponder" type = "button" value = "Responder"></p>
+    </form>
+    <p id = "respuesta"></p>
+    <p><strong>Pruebas:</strong> "¿Cuántas pulgadas hay en 2 metros?" da 78.74; "¿Cuántos litros hay en 10 cuartos?" da 9.46;
+    "¿Cuántos pies hay en 5 kilogramos?" es una conversión inválida.</p>
+    <p><strong>Unidades:</strong> metros, centimetros, milimetros, kilometros, pulgadas, pies, yardas, millas, litros,
+    mililitros, cuartos, galones, gramos, kilogramos, libras, onzas (en singular o plural).</p>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.21 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.21</title>
+    <style>
+        textarea { font-family: monospace; }
+    </style>
+    <script>
+        var conocidas = [ "rio", "tio", "oir", "gor", "rot", "ojo", "sol", "los", "mar", "ama", "ira", "ari", "gol", "lot",
+                          "pan", "uno", "son", "sal", "las", "oro", "ora", "tia", "ria", "ti", "rig", "tir" ];
+
+        function generar()
+        {
+            var palabra = document.getElementById( "campoPalabra" ).value.toLowerCase();
+            var salida = document.getElementById( "salida" );
+
+            if ( palabra.length != 5 )
+            {
+                salida.value = "La palabra debe tener exactamente 5 letras.";
+                return;
+            }
+
+            var resultados = [];
+            for ( var i = 0; i < 5; ++i )
+                for ( var j = 0; j < 5; ++j )
+                    for ( var k = 0; k < 5; ++k )
+                        if ( i != j && j != k && i != k )
+                        {
+                            var tres = palabra.charAt( i ) + palabra.charAt( j ) + palabra.charAt( k );
+                            if ( resultados.indexOf( tres ) == -1 )
+                                resultados[ resultados.length ] = tres;
+                        }
+
+            resultados.sort();
+            var texto = resultados.length + " cadenas distintas (* = palabra conocida):\n";
+            for ( var r = 0; r < resultados.length; ++r )
+            {
+                texto += resultados[ r ] + ( conocidas.indexOf( resultados[ r ] ) != -1 ? "*" : " " ) + "  ";
+                if ( r % 10 == 9 )
+                    texto += "\n";
+            }
+            salida.value = texto;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonGenerar" ).addEventListener( "click", generar, false );
+            generar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.21</h1>
+    <h2>Cadenas de tres letras a partir de una palabra de cinco</h2>
+
+    <p>Se usan tres ciclos anidados para elegir 3 posiciones <strong>distintas</strong> (i, j, k) de la palabra.
+    Eso da 5 × 4 × 3 = 60 combinaciones. Las repetidas se descartan con <code>indexOf</code>. La computadora no
+    sabe cuáles son palabras reales, así que se marcan con * las que están en una pequeña lista de palabras conocidas
+    (como "rio", "tio" y "oir" en "trigo").</p>
+    <form action = "#">
+        <p><label>Palabra de 5 letras: <input id = "campoPalabra" type = "text" maxlength = "5" value = "trigo"></label>
+           <input id = "botonGenerar" type = "button" value = "Generar"></p>
+        <p><textarea id = "salida" rows = "14" cols = "60" readonly></textarea></p>
+    </form>
+
+    <p>
+      </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

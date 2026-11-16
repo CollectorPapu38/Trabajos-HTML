@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.27 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.27</title>
+    <script>
+        function cargarLista()
+        {
+            var lineas = document.getElementById( "lista" ).value.toLowerCase().split( "\n" );
+            var lista = [];
+            for ( var i = 0; i < lineas.length; ++i )
+                if ( lineas[ i ].length > 0 )
+                    lista[ lista.length ] = lineas[ i ];
+            return lista;
+        }
+
+        function agregarSiExiste( candidato, listaDePalabras, sugerencias )
+        {
+            if ( listaDePalabras.indexOf( candidato ) != -1 && sugerencias.indexOf( candidato ) == -1 )
+                sugerencias[ sugerencias.length ] = candidato;
+        }
+
+        function revisar()
+        {
+            var listaDePalabras = cargarLista();
+            var palabra = document.getElementById( "campoPalabra" ).value.toLowerCase();
+            var resultado = document.getElementById( "resultado" );
+            var i;
+
+            if ( listaDePalabras.indexOf( palabra ) != -1 )
+            {
+                resultado.innerHTML = "La palabra est&aacute; escrita correctamente";
+                return;
+            }
+
+            var sugerencias = [];
+
+            // 1) transposiciones de letras adyacentes
+            for ( i = 0; i < palabra.length - 1; ++i )
+            {
+                var candidato = palabra.substring( 0, i ) + palabra.charAt( i + 1 ) +
+                    palabra.charAt( i ) + palabra.substring( i + 2 );
+                agregarSiExiste( candidato, listaDePalabras, sugerencias );
+            }
+
+            // 2) quitar una letra (incluye las letras dobles)
+            for ( i = 0; i < palabra.length; ++i )
+                agregarSiExiste( palabra.substring( 0, i ) + palabra.substring( i + 1 ), listaDePalabras, sugerencias );
+
+            var texto = "La palabra no est&aacute; escrita correctamente.";
+            for ( i = 0; i < sugerencias.length; ++i )
+                texto += "<br>&iquest;Quiso decir \"" + sugerencias[ i ] + "\"?";
+            if ( sugerencias.length == 0 )
+                texto += "<br>No se encontraron sugerencias.";
+            resultado.innerHTML = texto;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonRevisar" ).addEventListener( "click", revisar, false );
+            revisar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.27</h1>
+    <h2>Proyecto: un corrector ortográfico</h2>
+
+    <p>La <code>listaDePalabras</code> se puede editar (una palabra por renglón). Si la palabra no está en la lista, se
+    generan candidatos y se buscan con <code>indexOf</code>:</p>
+    <ul>
+        <li><strong>Transposiciones</strong> de letras adyacentes: "perdeterminado" → "predeterminado".</li>
+        <li><strong>Quitar una letra doble</strong>: "úttil" → "útil".</li>
+        <li><strong>Quitar una letra cualquiera</strong> (letra de más).</li>
+    </ul>
+    <form action = "#">
+        <p><label>listaDePalabras:<br><textarea id = "lista" rows = "8" cols = "30">predeterminado
+útil
+cumpleaños
+programa
+computadora
+arreglo
+función
+cadena
+objeto
+javascript</textarea></label></p>
+        <p><label>Palabra: <input id = "campoPalabra" type = "text" value = "perdeterminado"></label>
+           <input id = "botonRevisar" type = "button" value = "Revisar"></p>
+    </form>
+    <p id = "resultado"></p>
+    <p><strong>Pruebas:</strong> perdeterminado, úttil, porgrama, cadenaa, objeto.</p>
+
+    <p>
+    </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

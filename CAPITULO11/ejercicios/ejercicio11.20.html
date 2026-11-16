@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.20 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.20</title>
+    <script>
+        function miLastIndexOf( texto, subcadena, desde )
+        {
+            var inicio = texto.length - subcadena.length;
+            if ( desde < inicio )
+                inicio = desde;
+
+            for ( var i = inicio; i >= 0; --i )
+            {
+                var coincide = true;
+                for ( var j = 0; j < subcadena.length; ++j )
+                {
+                    if ( texto.charAt( i + j ) != subcadena.charAt( j ) )
+                    {
+                        coincide = false;
+                        break;
+                    }
+                }
+                if ( coincide )
+                    return i;
+            }
+            return -1;
+        }
+
+        function buscar()
+        {
+            var texto = document.getElementById( "campoTexto" ).value;
+            var sub = document.getElementById( "campoBuscar" ).value;
+            var desde = parseInt( document.getElementById( "campoDesde" ).value );
+            var original;
+
+            if ( isNaN( desde ) )
+            {
+                desde = texto.length;
+                original = texto.lastIndexOf( sub );
+            }
+            else
+                original = texto.lastIndexOf( sub, desde );
+
+            document.getElementById( "resultado" ).innerHTML =
+                "miLastIndexOf: <strong>" + miLastIndexOf( texto, sub, desde ) + "</strong> &nbsp;|&nbsp; " +
+                "lastIndexOf original: " + original;
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonBuscar" ).addEventListener( "click", buscar, false );
+            buscar();
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.20</h1>
+    <h2>Versión propia de lastIndexOf</h2>
+
+    <p>Es igual que el 11.19, pero recorriendo las posiciones <strong>de atrás hacia adelante</strong>. Empieza en
+    <code>desde</code> (o en la última posición posible) y la primera coincidencia que encuentra es la última del
+    texto.</p>
+    <form action = "#">
+        <p><label>Texto: <input id = "campoTexto" type = "text" size = "45" value = "abcdefghijklmnopqrstuvwxyzabcdefghijklm"></label></p>
+        <p><label>Buscar: <input id = "campoBuscar" type = "text" value = "def"></label>
+           <label>Desde (vac&iacute;o = final): <input id = "campoDesde" type = "number" min = "0"></label>
+           <input id = "botonBuscar" type = "button" value = "Buscar"></p>
+    </form>
+    <p id = "resultado"></p>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Ejercicio 11.10 -->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Ejercicio 11.10</title>
+    <script>
+        function separar()
+        {
+            var telefono = document.getElementById( "campoTelefono" ).value;
+            var mensaje = document.getElementById( "mensaje" );
+
+            var partes = telefono.split( ")" );          // [ "(228", "812-3456" ]
+            if ( partes.length != 2 || telefono.charAt( 0 ) != "(" )
+            {
+                mensaje.innerHTML = "Formato inv&aacute;lido. Use (555)555-5555";
+                return;
+            }
+
+            var area = partes[ 0 ].substring( 1 );       // "228"
+            var resto = partes[ 1 ].split( "-" );         // [ "812", "3456" ]
+
+            if ( area.length != 3 || resto.length != 2 || resto[ 0 ].length != 3 || resto[ 1 ].length != 4 )
+            {
+                mensaje.innerHTML = "Formato inv&aacute;lido. Use (555)555-5555";
+                return;
+            }
+
+            document.getElementById( "campoArea" ).value = area;
+            document.getElementById( "campoNumero" ).value = resto[ 0 ] + resto[ 1 ];
+            mensaje.innerHTML = "Tokens: \"" + area + "\", \"" + resto[ 0 ] + "\" y \"" + resto[ 1 ] + "\"";
+        }
+
+        function iniciar()
+        {
+            document.getElementById( "botonSeparar" ).addEventListener( "click", separar, false );
+        }
+
+        window.addEventListener( "load", iniciar, false );
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 11.10</h1>
+    <h2>Separar un número telefónico (555)555-5555</h2>
+
+    <p>Se hacen dos tokenizaciones con <code>split</code>:</p>
+    <ol>
+        <li><code>"(555)555-5555".split( ")" )</code> da <code>[ "(555", "555-5555" ]</code>. Al primer token se le
+            quita el "(" con <code>substring( 1 )</code> y queda el código de área.</li>
+        <li>El segundo token, <code>"555-5555".split( "-" )</code>, da los primeros 3 dígitos y los últimos 4.</li>
+    </ol>
+    <form action = "#">
+        <p><label>Tel&eacute;fono: <input id = "campoTelefono" type = "text" value = "(228)812-3456"></label>
+           <input id = "botonSeparar" type = "button" value = "Separar"></p>
+        <p><label>C&oacute;digo de &aacute;rea: <input id = "campoArea" type = "text" readonly></label></p>
+        <p><label>N&uacute;mero de 7 d&iacute;gitos: <input id = "campoNumero" type = "text" readonly></label></p>
+    </form>
+    <p id = "mensaje"></p>
+
+    <p>
+         </a>
+            <a href="Indi.html">
+         <img src="image/rever.png" alt="Ir al Índice" width="60" style="vertical-align: middle;">
+      </a>
+    </p>
+</body>
+</html>
